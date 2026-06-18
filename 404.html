@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Page not found — CORE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#050507" />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<style>
+  :root{--accent:#A45CEA;--head:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+    --body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{background:#050507;color:#F4F6FB;font-family:var(--body);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:32px;-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+  .glow{position:fixed;top:-220px;left:50%;transform:translateX(-50%);width:760px;height:520px;max-width:120vw;border-radius:50%;
+    background:radial-gradient(circle,rgba(164,92,234,.22),rgba(199,79,151,.1) 46%,transparent 68%);filter:blur(34px);pointer-events:none}
+  img.logo{width:64px;height:64px;border-radius:16px;margin-bottom:28px;position:relative;z-index:1;
+    box-shadow:0 0 44px rgba(164,92,234,.5)}
+  h1{position:relative;z-index:1;font-family:var(--head);font-weight:800;font-size:clamp(72px,16vw,140px);letter-spacing:-0.04em;margin:0;line-height:1;
+    background:linear-gradient(100deg,#B488FF,#FFC4E6 50%,#FF8FCB);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  p{position:relative;z-index:1;color:#9A9CAB;font-size:18px;font-weight:300;margin:14px 0 32px;max-width:30ch}
+  a.home{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:14px;
+    font-family:var(--head);font-weight:600;font-size:15px;color:#fff;text-decoration:none;
+    background:linear-gradient(96deg,#A45CEA,#C74F97);box-shadow:0 10px 30px rgba(164,92,234,.34);transition:transform .15s,box-shadow .25s}
+  a.home:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(164,92,234,.46)}
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <img class="logo" src="assets/app-icon.png" alt="CORE" />
+  <h1>404</h1>
+  <p>This page slipped. Let's get you back on track.</p>
+  <a class="home" href="/">← Back to CORE</a>
+</body>
+</html>
