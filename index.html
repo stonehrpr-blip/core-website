@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CORE — Enter your core.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="CORE — your ultimate plan to lock in and reset your life. Quit bad habits, climb one Life Score, and let an AI coach hold the line. Download for iPhone and Android." />
+<meta name="theme-color" content="#050507" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+<meta property="og:title" content="CORE — Enter your core." />
+<meta property="og:description" content="Quit bad habits, climb one Life Score, reset your life. Download for iPhone and Android." />
+<meta property="og:image" content="assets/logo-512.png" />
+<meta property="og:type" content="website" />
+<!-- Apple system font (San Francisco) renders natively via -apple-system; no web font needed -->
+<style>
+  :root{
+    --bg:#050507; --text:#F4F6FB; --muted:#9A9CAB; --dim:#6A6E7E;
+    --accent:#A45CEA; --accent2:#C74F97;
+    --indigo:#8B53F0;                 /* hero/footer glow tint */
+    --border:rgba(255,255,255,0.08);
+    --card:#0E0F18; --card2:#161826;
+    --head:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+    --body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;padding:0}
+  body{background:#000;color:var(--text);font-family:var(--body);font-weight:400;line-height:1.62;letter-spacing:-0.006em;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;overflow-x:hidden;
+    animation:pageIn .6s ease both}
+  @keyframes pageIn{from{opacity:0}to{opacity:1}}
+  p{text-wrap:pretty}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+  a{color:inherit;text-decoration:none}
+  img,video{max-width:100%;display:block}
+  h1,h2,h3{font-family:var(--head);margin:0;font-weight:700;letter-spacing:-0.022em;line-height:1.08;text-wrap:balance}
+  button{font-family:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 26px}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(34px) scale(.99);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.09s}.reveal.d2{transition-delay:.18s}.reveal.d3{transition-delay:.27s}
+
+  /* ===== nav ===== */
+  /* resizable navbar — full-width at top, shrinks into a floating pill on scroll */
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:center;padding:14px 20px;transition:padding .35s cubic-bezier(.22,.61,.36,1)}
+  .nav-inner{width:100%;max-width:1120px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+    padding:12px 14px 12px 18px;border-radius:18px;border:1px solid transparent;
+    transition:max-width .45s cubic-bezier(.22,.61,.36,1),background .35s,border-color .35s,box-shadow .35s,padding .35s,backdrop-filter .35s}
+  nav.scrolled{padding:12px 20px}
+  nav.scrolled .nav-inner{max-width:880px;background:rgba(12,12,17,0.7);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);
+    border-color:var(--border);box-shadow:0 12px 40px rgba(0,0,0,.42)}
+  /* logo */
+  .logo-slot{width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.34,1.56,.64,1),filter .3s}
+  .logo-slot img{width:100%;height:100%;object-fit:contain;display:block}
+  .logo-slot:hover{transform:scale(1.1) rotate(-4deg);filter:drop-shadow(0 0 14px rgba(164,92,234,.55))}
+  /* desktop inline links (centred) */
+  .nav-links-desk{display:flex;gap:34px;position:absolute;left:50%;transform:translateX(-50%)}
+  .nav-links-desk a{position:relative;font-size:14.5px;color:var(--muted);font-weight:500;padding:4px 2px;transition:color .25s}
+  .nav-links-desk a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1.5px;border-radius:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:center;
+    transition:transform .32s cubic-bezier(.22,.61,.36,1)}
+  .nav-links-desk a:hover{color:#fff}
+  .nav-links-desk a:hover::after{transform:scaleX(1)}
+  .nav-right{display:flex;align-items:center;gap:10px}
+  .nav-cta{padding:10px 20px;border-radius:12px;font-size:14px;font-weight:600;color:#fff;
+    background:linear-gradient(96deg,#A45CEA,#C74F97);box-shadow:0 6px 20px rgba(164,92,234,.34);transition:transform .15s,box-shadow .25s}
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(164,92,234,.46)}
+  .nav-toggle{background:none;border:none;color:#fff;cursor:pointer;padding:6px;display:none}
+  .nav-toggle svg{width:28px;height:28px}
+  @media(max-width:860px){
+    .nav-links-desk{display:none}
+    .nav-cta{display:none}
+    .nav-toggle{display:inline-flex}
+    nav.scrolled .nav-inner{max-width:1120px}
+  }
+  /* slide-down menu */
+  .menu{position:fixed;inset:0 0 auto 0;top:0;z-index:55;background:rgba(8,8,12,0.97);backdrop-filter:blur(20px);
+    transform:translateY(-100%);transition:transform .4s cubic-bezier(.22,.61,.36,1);padding:96px 32px 40px;display:flex;flex-direction:column;gap:6px}
+  .menu.open{transform:none}
+  .menu a{font-family:var(--head);font-size:26px;font-weight:600;color:var(--text);padding:14px 0;border-bottom:1px solid var(--border)}
+  .menu a:hover{color:var(--accent)}
+
+  /* ===== starfield + glow ===== */
+  /* site-wide starfield (fixed behind all content) */
+  .stars{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .stars span{position:absolute;border-radius:50%;background:#fff}
+  .stars span.tw{animation:twinkle var(--tdur,4s) ease-in-out var(--tdel,0s) infinite}
+  @keyframes twinkle{0%,100%{opacity:var(--tmin,.1)}50%{opacity:var(--tmax,.5)}}
+
+  /* tracing beam — glowing scroll-progress rail down the left */
+  .beam{position:fixed;top:0;left:20px;width:1.5px;height:100vh;z-index:6;pointer-events:none}
+  .beam-track{position:absolute;inset:0;border-radius:2px;background:rgba(255,255,255,.035)}
+  .beam-fill{position:absolute;left:0;top:0;width:100%;height:0;border-radius:2px;
+    background:linear-gradient(180deg,#B488FF,#FF8FCB);box-shadow:0 0 6px rgba(180,136,255,.4)}
+  .beam-bead{position:absolute;left:50%;top:0;width:6px;height:6px;border-radius:50%;transform:translate(-50%,-50%);
+    background:#fff;box-shadow:0 0 5px 1px rgba(180,136,255,.8),0 0 11px 3px rgba(255,143,203,.35)}
+  @media(max-width:980px){.beam{display:none}}
+  .hero-glow{position:absolute;top:-280px;left:50%;transform:translateX(-50%);width:1100px;height:760px;max-width:140vw;
+    border-radius:50%;background:radial-gradient(circle,rgba(145,89,234,0.34),rgba(199,46,134,0.12) 42%,transparent 66%);
+    filter:blur(40px);z-index:0;pointer-events:none}
+
+  /* ===== hero ===== */
+  .hero{position:relative;text-align:center;padding:170px 0 120px;overflow:hidden}
+  .hero .wrap{position:relative;z-index:2}
+  /* app icon above the headline (swap the gradient div for your icon img later) */
+  .app-icon{width:98px;height:98px;border-radius:23px;margin:0 auto 30px;display:block;
+    box-shadow:0 0 54px 6px rgba(164,92,234,.55), 0 0 22px rgba(199,79,151,.4), 0 18px 46px rgba(164,92,234,.3)}
+  .social{display:inline-flex;align-items:center;gap:16px;margin-bottom:42px}
+  .avatars{display:flex}
+  .avatars i{width:42px;height:42px;border-radius:50%;border:2px solid #050507;margin-left:-12px;background-size:cover;background-position:center}
+  .avatars i:first-child{margin-left:0}
+  .avatars i:nth-child(1){background:linear-gradient(135deg,#FF6BAA,#7A3CFF)}
+  .avatars i:nth-child(2){background:linear-gradient(135deg,#4A8FFF,#5CE1E6)}
+  .avatars i:nth-child(3){background:linear-gradient(135deg,#FFD05C,#FF7A45)}
+  .avatars i:nth-child(4){background:linear-gradient(135deg,#B388FF,#4A8FFF)}
+  .social span{font-size:17px;color:var(--muted);font-weight:400}
+  .social span b{color:var(--text);font-weight:600}
+  .hero h1{font-size:clamp(52px,9.4vw,108px);font-weight:800;letter-spacing:-0.035em;line-height:1.12;max-width:13ch;margin:0 auto;
+    padding:0.04em 0.06em 0.16em;
+    background:linear-gradient(100deg,#B488FF 0%,#FFC4E6 44%,#FF8FCB 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 6px 34px rgba(164,92,234,0.32))}
+  .hero .sub{font-size:clamp(17px,2.1vw,21px);color:var(--muted);font-weight:400;max-width:600px;margin:30px auto 0;line-height:1.6}
+
+  /* store badges */
+  .stores{display:flex;gap:16px;margin-top:48px;flex-wrap:wrap;justify-content:center}
+  .store{display:inline-flex;align-items:center;gap:12px;padding:13px 22px;border-radius:13px;background:#fff;color:#000;
+    transition:transform .18s ease,box-shadow .25s ease;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+  .store:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.6)}
+  .store svg{flex-shrink:0}
+  .store .lbl{text-align:left;line-height:1.1}
+  .store .lbl small{display:block;font-size:11px;font-weight:500;letter-spacing:.02em;opacity:.72}
+  .store .lbl b{display:block;font-family:var(--head);font-size:19px;font-weight:600;letter-spacing:.01em}
+
+  /* ===== sections ===== */
+  section{position:relative;z-index:2;padding:120px 0}
+  .pill{display:inline-flex;align-items:center;padding:8px 18px;border:1px solid var(--border);border-radius:11px;
+    font-size:14px;color:var(--muted);background:var(--card);font-family:var(--head);font-weight:500}
+  .sec-head{text-align:center;max-width:680px;margin:0 auto 60px}
+  .sec-head .pill{margin-bottom:24px}
+  .sec-head h2{font-size:clamp(32px,5vw,52px);font-weight:600;margin-bottom:18px}
+  .sec-head p{color:var(--muted);font-weight:400;font-size:clamp(16px,2vw,19px);line-height:1.6}
+
+  /* ===== how it works ===== */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;max-width:980px;margin:0 auto;position:relative}
+  .step{text-align:center;padding:0 8px}
+  .snum{font-family:var(--head);font-size:60px;font-weight:800;line-height:1.12;margin-bottom:14px;padding-bottom:.06em;
+    background:linear-gradient(96deg,#A66BF0,#D24A93 60%,#9A63F0);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 4px 24px rgba(164,92,234,0.30))}
+  .step h3{font-size:22px;font-weight:700;margin-bottom:11px}
+  .step p{color:var(--muted);font-weight:400;font-size:15.5px;line-height:1.65;max-width:30ch;margin:0 auto}
+  .step{position:relative}
+  /* thin arrow between steps (not behind them) — sits in the gap, aligned with the number */
+  .step:not(:last-child)::after{content:"";position:absolute;top:30px;right:-40px;width:46px;height:14px;transform:translateY(-50%);
+    background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='14' viewBox='0 0 46 14' fill='none' stroke='%237A7E8C' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 7h40M37 2l5 5-5 5'/%3E%3C/svg%3E");opacity:.7}
+
+  /* ===== benefits phone showcase ===== */
+  /* Reload-style: boxed feature cards both sides, phone centred, glow behind, no outer box */
+  .showcase-card{position:relative;display:grid;grid-template-columns:1fr auto 1fr;gap:30px;align-items:center;z-index:2}
+  .showcase-card::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:540px;height:700px;max-width:90%;border-radius:50%;
+    background:radial-gradient(circle,rgba(164,92,234,0.18),rgba(199,79,151,0.06) 45%,transparent 68%);
+    filter:blur(50px);z-index:-1;pointer-events:none}
+  /* device frame around the static app screenshot (screenshot has no bezel of its own) */
+  .phone{position:relative;width:300px;max-width:72vw;padding:11px;border-radius:54px;
+    background:#08080b;border:1px solid #2a2c36;box-shadow:0 44px 120px rgba(0,0,0,.78);will-change:transform}
+  .phone img{width:100%;height:auto;display:block;border-radius:44px}
+
+  /* boxed feature cards that fade in from each side */
+  .feat-col{display:flex;flex-direction:column;gap:22px;justify-content:center}
+  .sidefeat{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px 28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.05);
+    opacity:0;transition:opacity 1s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1),border-color .3s,background .3s,box-shadow .35s}
+  .feat-col.left .sidefeat{transform:translateX(-48px)}
+  .feat-col.right .sidefeat{transform:translateX(48px)}
+  .sidefeat.in{opacity:1;transform:none}
+  .feat-col .sidefeat:nth-child(2){transition-delay:.16s}
+  .sidefeat:hover{transform:translateY(-5px);border-color:rgba(164,92,234,.5);background:var(--card2);
+    box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 32px rgba(164,92,234,.2)}
+  .sidefeat .ico{width:52px;height:52px;border-radius:14px;background:#16161f;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+  .sidefeat .ico svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .sidefeat h3{font-size:20px;font-weight:700;margin-bottom:10px}
+  .sidefeat p{color:var(--muted);font-weight:400;font-size:14.5px;line-height:1.6}
+
+  /* ===== benefit cards ===== */
+  .cards{display:flex;flex-direction:column;gap:22px;max-width:920px;margin:64px auto 0}
+  .bcard{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:34px 36px;
+    transition:transform .3s,border-color .3s,background .3s;position:relative;overflow:hidden}
+  .bcard:hover{transform:translateY(-3px);border-color:rgba(108,99,255,.32);background:var(--card2)}
+  .bcard .ico{width:58px;height:58px;border-radius:15px;background:#16161f;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;margin-bottom:26px}
+  .bcard .ico svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .bcard h3{font-size:clamp(22px,3vw,28px);font-weight:600;margin-bottom:12px}
+  .bcard p{color:var(--muted);font-weight:400;font-size:clamp(15px,1.8vw,18px);line-height:1.6;max-width:60ch}
+
+  /* ===== globe (Three.js / three-globe) ===== */
+  #global{text-align:center;overflow:hidden}
+  .globe-wrap{position:relative;width:min(620px,92vw);aspect-ratio:1;margin:24px auto -4%}
+  .globe-glow{position:absolute;inset:4%;border-radius:50%;
+    background:radial-gradient(circle at 50% 45%,rgba(56,189,248,.16),rgba(180,136,255,.12) 48%,transparent 68%);filter:blur(28px)}
+  #globeViz{position:relative;z-index:1;width:100%;height:100%}
+  #globeViz canvas{display:block;width:100%!important;height:100%!important;outline:none}
+  #globeErr{position:absolute;left:0;right:0;bottom:6px;color:#FF8FCB;font-size:12px}
+
+  /* ===== pricing ===== */
+  #pricing{text-align:center}
+  .price-toggle{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--border);border-radius:99px;background:var(--card);margin:36px auto 0}
+  .pt-opt{border:none;background:none;color:var(--muted);font-family:var(--head);font-weight:600;font-size:14px;
+    padding:10px 20px;border-radius:99px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:color .2s,background .3s}
+  .pt-opt.active{background:linear-gradient(96deg,#A45CEA,#C74F97);color:#fff}
+  .pt-save{font-size:11px;font-weight:600;background:rgba(52,211,153,.16);color:#34D399;padding:2px 8px;border-radius:99px;transition:background .3s,color .3s}
+  .pt-opt.active .pt-save{background:rgba(255,255,255,.22);color:#fff}
+  .price-card{max-width:430px;margin:50px auto 0;background:var(--card);border:1px solid rgba(164,92,234,.42);
+    border-radius:24px;padding:42px 36px;text-align:left;position:relative;box-shadow:0 0 56px rgba(164,92,234,.16)}
+  .price-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);white-space:nowrap;
+    background:linear-gradient(96deg,#A45CEA,#C74F97);color:#fff;font-size:12px;font-weight:600;font-family:var(--head);
+    padding:6px 16px;border-radius:99px;box-shadow:0 6px 18px rgba(164,92,234,.4)}
+  .price-name{font-family:var(--head);font-weight:700;font-size:20px}
+  .price-amt{display:flex;align-items:baseline;gap:7px;margin:12px 0 4px}
+  .price-amt b{font-family:var(--head);font-weight:800;font-size:56px;letter-spacing:-0.03em;line-height:1;
+    background:linear-gradient(100deg,#B488FF,#FF8FCB);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .price-amt span{color:var(--muted);font-size:16px}
+  .price-sub{color:var(--muted);font-size:14px;margin-bottom:26px}
+  .price-list{list-style:none;padding:0;margin:0 0 30px;display:flex;flex-direction:column;gap:13px}
+  .price-list li{display:flex;align-items:flex-start;gap:11px;color:#D7DAE3;font-size:15px;line-height:1.45}
+  .price-list svg{flex-shrink:0;width:20px;height:20px;stroke:#34D399;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+  .price-cta{display:block;text-align:center;width:100%;padding:15px;border-radius:14px;font-family:var(--head);font-weight:600;
+    font-size:15.5px;color:#fff;background:linear-gradient(96deg,#A45CEA,#C74F97);box-shadow:0 10px 30px rgba(164,92,234,.34);
+    transition:transform .15s,box-shadow .25s}
+  .price-cta:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(164,92,234,.46)}
+  .price-note{text-align:center;color:var(--dim);font-size:13px;margin-top:15px}
+
+  /* ===== faq (single-open accordion, animated) ===== */
+  .faq{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+  .faq-item{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:border-color .3s,box-shadow .35s}
+  .faq-item:hover{border-color:rgba(164,92,234,.4);box-shadow:0 0 28px rgba(164,92,234,.14)}
+  .faq-item.open{border-color:rgba(164,92,234,.45);box-shadow:0 0 30px rgba(164,92,234,.16)}
+  .faq-q{width:100%;background:none;border:none;cursor:pointer;text-align:left;color:var(--text);
+    padding:24px 28px;font-size:clamp(16px,2vw,19px);font-weight:500;font-family:var(--head);
+    display:flex;justify-content:space-between;align-items:center;gap:16px;transition:color .2s}
+  .faq-q .chev{flex-shrink:0;display:flex;transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+  .faq-q .chev svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .faq-item.open .faq-q .chev{transform:rotate(180deg)}
+  .faq-item.open .faq-q .chev svg{stroke:var(--accent)}
+  /* grid-rows trick animates open/close height smoothly */
+  .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.22,.61,.36,1)}
+  .faq-item.open .faq-a{grid-template-rows:1fr}
+  .faq-a-inner{overflow:hidden}
+  .faq-a p{color:var(--muted);font-weight:400;font-size:15.5px;line-height:1.7;padding:0 28px 26px;margin:0}
+
+  /* ===== final cta ===== */
+  .cta{text-align:center;padding:120px 0 100px}
+  .cta h2{font-size:clamp(36px,6vw,68px);font-weight:800;letter-spacing:-0.035em;line-height:1.04;margin-bottom:20px;
+    background:linear-gradient(100deg,#B488FF 0%,#FFC4E6 45%,#FF8FCB 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 6px 30px rgba(164,92,234,.3))}
+  .cta p{color:var(--muted);font-weight:500;font-size:clamp(17px,2.2vw,21px);max-width:600px;margin:0 auto 40px;line-height:1.55;font-family:var(--head)}
+
+  /* ===== footer ===== */
+  footer{position:relative;z-index:2;border-top:1px solid var(--border);overflow:hidden}
+  .foot-glow{position:absolute;bottom:-340px;left:50%;transform:translateX(-50%);width:1000px;height:640px;max-width:140vw;
+    border-radius:50%;background:radial-gradient(circle,rgba(164,92,234,0.24),rgba(199,79,151,0.10) 45%,transparent 66%);filter:blur(40px);z-index:0;pointer-events:none}
+  .foot-inner{position:relative;z-index:2;padding:72px 0 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+  .foot-brand .logo-slot{margin-bottom:20px}
+  .foot-brand .wm{font-family:var(--head);font-size:26px;font-weight:700;letter-spacing:.02em}
+  .foot-brand p{color:var(--muted);font-weight:400;font-size:15px;max-width:34ch;margin:14px 0 26px;line-height:1.55}
+  .foot-col h4{font-family:var(--head);font-size:18px;font-weight:600;margin:0 0 18px}
+  .foot-col a{display:block;color:var(--muted);font-size:15px;padding:7px 0;transition:color .2s}
+  .foot-col a:hover{color:#fff}
+  .foot-bottom{position:relative;z-index:2;border-top:1px solid var(--border);padding:24px 0;font-size:13px;color:var(--dim);text-align:center}
+
+  /* ===== contact / report form ===== */
+  .report-form{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  .report-form .row{display:flex;gap:14px}
+  .report-form input,.report-form textarea{width:100%;background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:15px 16px;color:var(--text);font-family:var(--body);font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical}
+  .report-form input::placeholder,.report-form textarea::placeholder{color:var(--dim)}
+  .report-form input:focus,.report-form textarea:focus{border-color:rgba(164,92,234,.55);box-shadow:0 0 0 4px rgba(164,92,234,.12)}
+  .report-form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .form-msg{text-align:center;font-size:13.5px;min-height:18px;color:var(--dim);margin-top:2px}
+  .form-msg.err{color:#F87171}.form-msg.ok{color:#34D399}
+  /* stateful send button: idle -> loading -> success */
+  .sbtn{align-self:center;margin-top:6px;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    min-width:180px;height:52px;padding:0 28px;border:none;border-radius:14px;cursor:pointer;
+    background:linear-gradient(96deg,#A45CEA,#C74F97);color:#fff;font-family:var(--head);font-weight:600;font-size:15.5px;
+    transition:transform .15s,box-shadow .25s,background .35s;box-shadow:0 12px 32px rgba(164,92,234,.34)}
+  .sbtn:hover{transform:translateY(-1px);box-shadow:0 16px 40px rgba(164,92,234,.45)}
+  .sbtn:disabled{cursor:default;transform:none}
+  .sbtn.loading{background:#23252f;box-shadow:none}
+  .sbtn.success{background:#22C55E;box-shadow:0 12px 32px rgba(34,197,94,.35)}
+  .sbtn .spinner{width:19px;height:19px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+  .sbtn svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* stack the showcase below ~1024px so the 3-col grid never gets cramped */
+  @media(max-width:1024px){
+    .showcase-card{grid-template-columns:1fr;gap:40px;padding:0;max-width:760px;margin:0 auto}
+    .phone{order:-1;justify-self:center;margin:0 auto;width:330px;max-width:84vw}
+    .feat-col{flex-direction:row;flex-wrap:wrap;gap:20px;justify-content:center}
+    .feat-col.left .sidefeat,.feat-col.right .sidefeat{transform:translateY(34px)}
+    .sidefeat{flex:1 1 300px;min-width:240px;max-width:none}
+  }
+  @media(max-width:680px){
+    .steps{grid-template-columns:1fr;gap:48px;max-width:340px}
+    /* arrows point downward between stacked steps */
+    .step:not(:last-child)::after{top:auto;bottom:-32px;right:auto;left:50%;transform:translate(-50%,0) rotate(90deg)}
+  }
+  @media(max-width:820px){
+    .foot-inner{grid-template-columns:1fr 1fr}
+    .foot-brand{grid-column:1 / -1}
+  }
+  @media(max-width:560px){
+    .stores{flex-direction:column;align-items:stretch;max-width:300px;margin-left:auto;margin-right:auto}
+    .store{justify-content:center}
+    .social span{font-size:15px}
+    section{padding:84px 0}.hero{padding:130px 0 84px}
+    .bcard{padding:28px}
+    .foot-inner{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    body{animation:none}
+    .faq-a{transition:none}
+    .beam{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo-slot" aria-label="CORE home"><img src="assets/app-icon.png" alt="CORE" /></a>
+    <div class="nav-links-desk">
+      <a href="#how">How it works</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="#download" class="nav-cta">Download</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="menu" id="menu">
+  <a href="#top">Home</a>
+  <a href="#how">How it works</a>
+  <a href="#benefits">Benefits</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Contact</a>
+  <a href="#download">Download</a>
+</div>
+
+<!-- site-wide starfield (fixed, behind everything) -->
+<div class="stars" id="stars"></div>
+
+<!-- tracing beam: glowing rail that fills as you scroll -->
+<div class="beam" aria-hidden="true">
+  <div class="beam-track"></div>
+  <div class="beam-fill" id="beamFill"></div>
+  <span class="beam-bead" id="beamBead"></span>
+</div>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <img src="assets/app-icon.png" class="app-icon reveal" alt="CORE" />
+    <h1 class="reveal d1">Enter your core,<br>level up.</h1>
+    <p class="sub reveal d2">Most apps reward a fake perfect streak. CORE rewards the <span style="color:#FFB3D9">honest</span> one — log every slip, prove the real work, and watch it climb one Life Score, with an AI coach that's seen your whole history.</p>
+
+    <div class="stores reveal d3">
+      <a class="store" href="#" aria-label="Download on the App Store">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
+        <span class="lbl"><small>Download on the</small><b>App Store</b></span>
+      </a>
+      <a class="store" href="#" aria-label="Get it on Google Play">
+        <svg width="24" height="26" viewBox="0 0 24 24"><path d="M3.6 2.2c-.3.3-.5.8-.5 1.4v16.8c0 .6.2 1.1.5 1.4l.1.1L13 12.6v-.2L3.7 2.1l-.1.1z" fill="#00D2FF"/><path d="M16.3 15.7l-3.3-3.3v-.2l3.3-3.3.1.1 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.2-.1.1z" fill="#FFCE00"/><path d="M16.4 15.6L13 12.3 3.6 21.8c.4.4 1 .4 1.7.1l11.1-6.3z" fill="#FF3A44"/><path d="M16.4 9L5.3 2.7c-.7-.4-1.3-.3-1.7.1L13 12.3 16.4 9z" fill="#00F076"/></svg>
+        <span class="lbl"><small>GET IT ON</small><b>Google Play</b></span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ HOW IT WORKS ============================ -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">How it works</span>
+      <h2>Reset your life in three steps.</h2>
+      <p>Three steps. No fake streaks, no shortcuts — just honest proof that compounds.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal d1">
+        <div class="snum">01</div>
+        <h3>Pick your habits</h3>
+        <p>Choose the vices you're quitting and the areas you want to level up. CORE builds your 60-day plan.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="snum">02</div>
+        <h3>Prove it daily</h3>
+        <p>Log slips honestly and snap proof of real tasks. The AI checks it — no faking your way up.</p>
+      </div>
+      <div class="step reveal d3">
+        <div class="snum">03</div>
+        <h3>Watch your score climb</h3>
+        <p>Every honest day rolls into one Life Score and pushes your rank from Focus all the way to Apex.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BENEFITS / PHONE ============================ -->
+<section id="benefits">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">Benefits</span>
+      <h2>A score you can't game.</h2>
+      <p>Streaks are easy to fake. CORE makes you prove it — honest slip logs, photo-verified tasks, one score that actually reflects your life.</p>
+    </div>
+
+    <div class="showcase-card reveal d1">
+      <!-- features fade in from the LEFT -->
+      <div class="feat-col left">
+        <div class="sidefeat">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M9.5 2a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 6 16a3 3 0 0 0 3.5 3V2z"/><path d="M14.5 2a3 3 0 0 1 3 3 3 3 0 0 1 2 5.2A3 3 0 0 1 18 16a3 3 0 0 1-3.5 3V2z"/></svg></div>
+          <h3>Rewire your brain</h3>
+          <p>Break the cycle of bad habits and doom-scrolling with a 60-day plan tailored to you.</p>
+        </div>
+        <div class="sidefeat">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M9 13a3 3 0 0 1 6 0v1H9z"/><circle cx="12" cy="10.5" r="1"/></svg></div>
+          <h3>Quit your bad habits</h3>
+          <p>Vape, scroll, spend, drink — log it honestly, watch the cost, and quit for good.</p>
+        </div>
+      </div>
+
+      <!-- SCREEN RECORDING (assets/demo.mp4) — cropped to just the phone -->
+      <div class="phone">
+        <img src="assets/screens/habit.png" width="840" height="1820" alt="CORE habit screen — log a slip honestly; honesty rewards your streak" loading="lazy" />
+      </div>
+
+      <!-- features fade in from the RIGHT -->
+      <div class="feat-col right">
+        <div class="sidefeat">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg></div>
+          <h3>Climb one Life Score</h3>
+          <p>Fitness, focus, money, mind and habits roll into one score you can't fake.</p>
+        </div>
+        <div class="sidefeat">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"/></svg></div>
+          <h3>An AI coach that knows you</h3>
+          <p>It reads your streak and stats, then says the one thing you need — in your tone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ GLOBE / WORLDWIDE ============================ -->
+<section id="global">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">Worldwide</span>
+      <h2>Built for anywhere.</h2>
+      <p>Your habits, your score, your coach — CORE goes with you, wherever you are.</p>
+    </div>
+    <div class="globe-wrap reveal d1">
+      <div class="globe-glow"></div>
+      <div id="globeViz"></div>
+      <div id="globeErr"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PRICING ============================ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">Pricing</span>
+      <h2>One plan. Everything in.</h2>
+      <p>Founder pricing for early members — lock it in before launch.</p>
+    </div>
+    <div class="price-toggle reveal d1" id="priceToggle">
+      <button class="pt-opt active" data-plan="monthly">Monthly</button>
+      <button class="pt-opt" data-plan="annual">Annual <span class="pt-save">Save 33%</span></button>
+    </div>
+    <div class="price-card reveal d2">
+      <div class="price-badge">Founder pricing</div>
+      <div class="price-name">Core Pro</div>
+      <div class="price-amt"><b id="priceAmt">$4.99</b><span id="pricePer">/ month</span></div>
+      <div class="price-sub" id="priceSub">Billed monthly · cancel anytime</div>
+      <ul class="price-list">
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>AI coach that knows your history</li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Every habit, vice &amp; quest — no limits</li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Full Life Score, all 5 stats &amp; 7 ranks</li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Streak protection &amp; recovery quests</li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Every future season drop included</li>
+      </ul>
+      <a class="price-cta" href="#download">Start your reset</a>
+      <div class="price-note">Cancel anytime · no commitment</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">FAQ</span>
+      <h2>Frequently asked questions.</h2>
+      <p>Quick answers to the most common questions about CORE and how it helps you take control.</p>
+    </div>
+    <div class="faq reveal d1" id="faqList">
+      <div class="faq-item open">
+        <button class="faq-q" aria-expanded="true">What is CORE and how can it help me?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>CORE is a habit app that does the opposite of the others: instead of rewarding a perfect streak you can fake, it rewards honesty — log slips truthfully, prove tasks with photos, and it all rolls into one Life Score, with an AI coach that remembers your whole history.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How does the AI coach work?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>It reads your streak, slips and stats to respond in context, and you choose its tone. It knows what page you're on and remembers what you're working on — so it says the one thing you actually need.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can CORE help me quit any habit?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Yes. Vape, weed, doom-scroll, drink, spending, junk food — it's built around proving real tasks and honest slip-logging, so it works for any vice or goal.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Will CORE help me be more productive?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>That's the point. Block distractions, log slips honestly, climb your score, and follow a 60-day plan that's customised to your level — so progress is always earned, never faked.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Does CORE track my activity?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Only what you choose. CORE is private by default, we never sell your data, and social features are fully opt-in. You can export everything any time.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT / REPORT ============================ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">Contact</span>
+      <h2>Get in touch.</h2>
+      <p>Found a bug or have a question? Send us a message — it goes straight to our team.</p>
+    </div>
+    <form class="report-form reveal d1" id="reportForm">
+      <div class="row">
+        <input type="email" name="email" placeholder="Your email" autocomplete="email" aria-label="Your email" required />
+        <input type="text" name="topic" placeholder="Subject (optional)" aria-label="Subject" />
+      </div>
+      <textarea name="message" rows="5" placeholder="Your message or bug report…" aria-label="Message" required></textarea>
+      <!-- FormSubmit settings -->
+      <input type="hidden" name="_subject" value="New CORE website message" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button type="submit" class="sbtn" id="sendBtn"><span class="sbtn-label">Send message</span></button>
+      <div class="form-msg" id="formMsg" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ============================ FINAL CTA ============================ -->
+<section class="cta" id="download">
+  <div class="wrap">
+    <h2 class="reveal">Stop faking it.<br>Start proving it.</h2>
+    <p class="reveal d1">Quit the vape, the scroll, the spend — log it honestly, climb one Life Score, and let a coach who knows your history hold the line.</p>
+    <div class="stores reveal d2" style="margin-top:0">
+      <a class="store" href="#" aria-label="Download on the App Store">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
+        <span class="lbl"><small>Download on the</small><b>App Store</b></span>
+      </a>
+      <a class="store" href="#" aria-label="Get it on Google Play">
+        <svg width="24" height="26" viewBox="0 0 24 24"><path d="M3.6 2.2c-.3.3-.5.8-.5 1.4v16.8c0 .6.2 1.1.5 1.4l.1.1L13 12.6v-.2L3.7 2.1l-.1.1z" fill="#00D2FF"/><path d="M16.3 15.7l-3.3-3.3v-.2l3.3-3.3.1.1 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.2-.1.1z" fill="#FFCE00"/><path d="M16.4 15.6L13 12.3 3.6 21.8c.4.4 1 .4 1.7.1l11.1-6.3z" fill="#FF3A44"/><path d="M16.4 9L5.3 2.7c-.7-.4-1.3-.3-1.7.1L13 12.3 16.4 9z" fill="#00F076"/></svg>
+        <span class="lbl"><small>GET IT ON</small><b>Google Play</b></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="foot-glow"></div>
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <div class="logo-slot" style="width:52px;height:52px"><img src="assets/app-icon.png" alt="CORE" /></div>
+      <div class="wm">CORE</div>
+      <p>Your ultimate plan to lock in and reset your life — only within 60 days.</p>
+      <a class="store" href="#" aria-label="Download on the App Store" style="display:inline-flex">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
+        <span class="lbl"><small>Download on the</small><b>App Store</b></span>
+      </a>
+    </div>
+    <div class="foot-col">
+      <h4>Pages</h4>
+      <a href="#top">Home</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="foot-col">
+      <h4>Information</h4>
+      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="#contact">Support</a>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2026 CORE. All rights reserved.</div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- always start at the top on load/refresh (no scroll restore), then play the load-in ---- */
+  if('scrollRestoration' in history){ history.scrollRestoration='manual'; }
+  window.scrollTo(0,0);
+  window.addEventListener('load',function(){ window.scrollTo(0,0); });
+  document.documentElement.classList.add('loaded');
+
+  /* ---- site-wide starfield: scatter stars across the viewport ---- */
+  var stars=document.getElementById('stars');
+  if(stars){
+    var COUNT=90, frag=document.createDocumentFragment();
+    var noMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    for(var i=0;i<COUNT;i++){
+      var s=document.createElement('span');
+      var sz=(Math.random()*2+1);                 // 1–3px
+      s.style.width=sz.toFixed(1)+'px'; s.style.height=sz.toFixed(1)+'px';
+      s.style.left=(Math.random()*100).toFixed(2)+'%';
+      s.style.top=(Math.random()*100).toFixed(2)+'%';
+      var o=Math.random()*0.45+0.1;
+      s.style.opacity=o.toFixed(2);                // faint → subtle
+      if(Math.random()>0.85) s.style.boxShadow='0 0 6px rgba(255,255,255,.6)';
+      if(!noMotion && Math.random()>0.4){          // ~60% twinkle, out of sync
+        s.classList.add('tw');
+        s.style.setProperty('--tmin',(o*0.28).toFixed(2));
+        s.style.setProperty('--tmax',o.toFixed(2));
+        s.style.setProperty('--tdur',(Math.random()*4+3).toFixed(1)+'s');
+        s.style.setProperty('--tdel',(Math.random()*6).toFixed(1)+'s');
+      }
+      frag.appendChild(s);
+    }
+    stars.appendChild(frag);
+  }
+
+  /* ---- nav scrolled border ---- */
+  var nav=document.getElementById('nav');
+  function onScroll(){ if(window.scrollY>12)nav.classList.add('scrolled');else nav.classList.remove('scrolled'); }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  /* ---- hamburger menu ---- */
+  var tg=document.getElementById('navToggle'),menu=document.getElementById('menu');
+  tg.setAttribute('aria-expanded','false'); tg.setAttribute('aria-controls','menu');
+  tg.addEventListener('click',function(){var o=menu.classList.toggle('open');tg.setAttribute('aria-expanded',o?'true':'false');});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');tg.setAttribute('aria-expanded','false');});});
+
+  /* ---- reveal on scroll ---- */
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal, .sidefeat').forEach(function(el){io.observe(el);});
+
+  /* ---- scroll-linked parallax: phone slides up, hero glow drifts, beam fills ---- */
+  var phone=document.querySelector('.phone');
+  var heroGlow=document.querySelector('.hero-glow');
+  var beamFill=document.getElementById('beamFill');
+  var beamBead=document.getElementById('beamBead');
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced){
+    var ticking=false;
+    function parallax(){
+      var y=window.scrollY||document.documentElement.scrollTop, vh=window.innerHeight||document.documentElement.clientHeight;
+      // hero glow drifts up + fades as you scroll past the hero
+      if(heroGlow){ heroGlow.style.transform='translateX(-50%) translateY('+(y*0.28).toFixed(1)+'px)'; heroGlow.style.opacity=Math.max(0.25,1-y/700).toFixed(2); }
+      // phone rises into place as it enters view
+      if(phone){
+        var r=phone.getBoundingClientRect();
+        var p=Math.min(1,Math.max(0,(vh - r.top)/(vh*0.85)));
+        phone.style.transform='translateY('+((1-p)*110).toFixed(1)+'px)';
+      }
+      // tracing beam fills + bead descends with scroll progress
+      if(beamFill){
+        var max=document.documentElement.scrollHeight-vh;
+        var prog=max>0?Math.min(1,y/max):0;
+        var h=prog*vh;
+        beamFill.style.height=h.toFixed(1)+'px';
+        beamBead.style.top=h.toFixed(1)+'px';
+      }
+      ticking=false;
+    }
+    function onScrollP(){ if(!ticking){ticking=true;requestAnimationFrame(parallax);} }
+    window.addEventListener('scroll',onScrollP,{passive:true});
+    window.addEventListener('resize',onScrollP,{passive:true});
+    parallax();
+  }
+
+  /* ---- FAQ accordion: one open at a time, animated ---- */
+  var faqList=document.getElementById('faqList');
+  if(faqList){
+    faqList.querySelectorAll('.faq-q').forEach(function(q){
+      q.addEventListener('click',function(){
+        var item=q.parentElement, isOpen=item.classList.contains('open');
+        faqList.querySelectorAll('.faq-item.open').forEach(function(o){
+          o.classList.remove('open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false');
+        });
+        if(!isOpen){ item.classList.add('open'); q.setAttribute('aria-expanded','true'); }
+      });
+    });
+  }
+
+  /* ---- pricing monthly/annual toggle ---- */
+  var priceToggle=document.getElementById('priceToggle');
+  if(priceToggle){
+    var PLANS={
+      monthly:{amt:'$4.99', per:'/ month', sub:'Billed monthly · cancel anytime'},
+      annual: {amt:'$3.33', per:'/ month', sub:'$39.99 billed yearly · cancel anytime'}
+    };
+    var pAmt=document.getElementById('priceAmt'), pPer=document.getElementById('pricePer'), pSub=document.getElementById('priceSub');
+    priceToggle.querySelectorAll('.pt-opt').forEach(function(b){
+      b.addEventListener('click',function(){
+        priceToggle.querySelectorAll('.pt-opt').forEach(function(o){o.classList.remove('active');});
+        b.classList.add('active');
+        var p=PLANS[b.dataset.plan];
+        pAmt.textContent=p.amt; pPer.textContent=p.per; pSub.textContent=p.sub;
+      });
+    });
+  }
+
+  /* ---- contact / report form -> emails corestudiosupport@gmail.com via FormSubmit ---- */
+  var form=document.getElementById('reportForm');
+  if(form){
+    var btn=document.getElementById('sendBtn');
+    var msg=document.getElementById('formMsg');
+    var IDLE='<span class="sbtn-label">Send message</span>';
+    var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function reset(){ btn.classList.remove('loading','success'); btn.disabled=false; btn.innerHTML=IDLE; }
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var email=(form.email.value||'').trim(), message=(form.message.value||'').trim();
+      if(form._honey.value){return;}                                  // honeypot -> silently drop bots
+      if(!EMAIL.test(email)){ msg.textContent='Please enter a valid email.'; msg.className='form-msg err'; form.email.focus(); return; }
+      if(message.length<3){ msg.textContent='Please write a message.'; msg.className='form-msg err'; form.message.focus(); return; }
+      msg.textContent=''; msg.className='form-msg';
+      btn.disabled=true; btn.classList.add('loading'); btn.innerHTML='<span class="spinner"></span>';
+      fetch('https://formsubmit.co/ajax/corestudiosupport@gmail.com',{
+        method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form)
+      })
+      .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function(){
+        btn.classList.remove('loading'); btn.classList.add('success');
+        btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Sent!';
+        form.reset();
+        msg.textContent='Thanks — we’ll get back to you soon.'; msg.className='form-msg ok';
+        setTimeout(reset,2800);
+      })
+      .catch(function(){
+        reset();
+        msg.textContent='Couldn’t send right now — email us at corestudiosupport@gmail.com'; msg.className='form-msg err';
+      });
+    });
+  }
+})();
+</script>
+
+<!-- ===== Three.js / three-globe — the full interactive globe (needs http(s); won't run on file://) ===== -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://esm.sh/three@0.170.0",
+    "three/": "https://esm.sh/three@0.170.0/",
+    "three-globe": "https://esm.sh/three-globe@2.45.2?external=three"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import ThreeGlobe from 'three-globe';
+
+window.addEventListener('error', function(e){ var x=document.getElementById('globeErr'); if(x&&!x.dataset.set){x.textContent='Globe error: '+(e.message||e.error); } });
+
+const globeConfig = {
+  pointSize: 4, globeColor: "#062056", showAtmosphere: true, atmosphereColor: "#FFFFFF",
+  atmosphereAltitude: 0.1, emissive: "#062056", emissiveIntensity: 0.1, shininess: 0.9,
+  polygonColor: "rgba(255,255,255,0.7)", ambientLight: "#38bdf8", directionalLeftLight: "#ffffff",
+  directionalTopLight: "#ffffff", pointLight: "#ffffff", arcTime: 1000, arcLength: 0.9,
+  rings: 1, maxRings: 3, autoRotate: true, autoRotateSpeed: 0.5,
+};
+const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
+const pick = () => colors[Math.floor(Math.random() * (colors.length - 1))];
+const arcs = [
+  {order:1,startLat:-19.885592,startLng:-43.951191,endLat:-22.9068,endLng:-43.1729,arcAlt:0.1,color:pick()},
+  {order:1,startLat:28.6139,startLng:77.209,endLat:3.139,endLng:101.6869,arcAlt:0.2,color:pick()},
+  {order:1,startLat:-19.885592,startLng:-43.951191,endLat:-1.303396,endLng:36.852443,arcAlt:0.5,color:pick()},
+  {order:2,startLat:1.3521,startLng:103.8198,endLat:35.6762,endLng:139.6503,arcAlt:0.2,color:pick()},
+  {order:2,startLat:51.5072,startLng:-0.1276,endLat:3.139,endLng:101.6869,arcAlt:0.3,color:pick()},
+  {order:2,startLat:-15.785493,startLng:-47.909029,endLat:36.162809,endLng:-115.119411,arcAlt:0.3,color:pick()},
+  {order:3,startLat:-33.8688,startLng:151.2093,endLat:22.3193,endLng:114.1694,arcAlt:0.3,color:pick()},
+  {order:3,startLat:21.3099,startLng:-157.8581,endLat:40.7128,endLng:-74.006,arcAlt:0.3,color:pick()},
+  {order:3,startLat:-6.2088,startLng:106.8456,endLat:51.5072,endLng:-0.1276,arcAlt:0.3,color:pick()},
+  {order:4,startLat:11.986597,startLng:8.571831,endLat:-15.595412,endLng:-56.05918,arcAlt:0.5,color:pick()},
+  {order:4,startLat:-34.6037,startLng:-58.3816,endLat:22.3193,endLng:114.1694,arcAlt:0.7,color:pick()},
+  {order:4,startLat:51.5072,startLng:-0.1276,endLat:48.8566,endLng:-2.3522,arcAlt:0.1,color:pick()},
+  {order:5,startLat:14.5995,startLng:120.9842,endLat:51.5072,endLng:-0.1276,arcAlt:0.3,color:pick()},
+  {order:5,startLat:1.3521,startLng:103.8198,endLat:-33.8688,endLng:151.2093,arcAlt:0.2,color:pick()},
+  {order:5,startLat:34.0522,startLng:-118.2437,endLat:48.8566,endLng:-2.3522,arcAlt:0.2,color:pick()},
+  {order:6,startLat:-15.432563,startLng:28.315853,endLat:1.094136,endLng:-63.34546,arcAlt:0.7,color:pick()},
+  {order:6,startLat:37.5665,startLng:126.978,endLat:35.6762,endLng:139.6503,arcAlt:0.1,color:pick()},
+  {order:6,startLat:22.3193,startLng:114.1694,endLat:51.5072,endLng:-0.1276,arcAlt:0.3,color:pick()},
+  {order:7,startLat:-19.885592,startLng:-43.951191,endLat:-15.595412,endLng:-56.05918,arcAlt:0.1,color:pick()},
+  {order:7,startLat:48.8566,startLng:-2.3522,endLat:52.52,endLng:13.405,arcAlt:0.1,color:pick()},
+  {order:7,startLat:52.52,startLng:13.405,endLat:34.0522,endLng:-118.2437,arcAlt:0.2,color:pick()},
+  {order:8,startLat:-8.833221,startLng:13.264837,endLat:-33.936138,endLng:18.436529,arcAlt:0.2,color:pick()},
+  {order:8,startLat:49.2827,startLng:-123.1207,endLat:52.3676,endLng:4.9041,arcAlt:0.2,color:pick()},
+  {order:8,startLat:1.3521,startLng:103.8198,endLat:40.7128,endLng:-74.006,arcAlt:0.5,color:pick()},
+  {order:9,startLat:51.5072,startLng:-0.1276,endLat:34.0522,endLng:-118.2437,arcAlt:0.2,color:pick()},
+  {order:9,startLat:22.3193,startLng:114.1694,endLat:-22.9068,endLng:-43.1729,arcAlt:0.7,color:pick()},
+  {order:9,startLat:1.3521,startLng:103.8198,endLat:-34.6037,endLng:-58.3816,arcAlt:0.5,color:pick()},
+  {order:10,startLat:-22.9068,startLng:-43.1729,endLat:28.6139,endLng:77.209,arcAlt:0.7,color:pick()},
+  {order:10,startLat:34.0522,startLng:-118.2437,endLat:31.2304,endLng:121.4737,arcAlt:0.3,color:pick()},
+  {order:10,startLat:-6.2088,startLng:106.8456,endLat:52.3676,endLng:4.9041,arcAlt:0.3,color:pick()},
+  {order:11,startLat:41.9028,startLng:12.4964,endLat:34.0522,endLng:-118.2437,arcAlt:0.2,color:pick()},
+  {order:11,startLat:-6.2088,startLng:106.8456,endLat:31.2304,endLng:121.4737,arcAlt:0.2,color:pick()},
+  {order:11,startLat:22.3193,startLng:114.1694,endLat:1.3521,endLng:103.8198,arcAlt:0.2,color:pick()},
+  {order:12,startLat:34.0522,startLng:-118.2437,endLat:37.7749,endLng:-122.4194,arcAlt:0.1,color:pick()},
+  {order:12,startLat:35.6762,startLng:139.6503,endLat:22.3193,endLng:114.1694,arcAlt:0.2,color:pick()},
+  {order:12,startLat:22.3193,startLng:114.1694,endLat:34.0522,endLng:-118.2437,arcAlt:0.3,color:pick()},
+  {order:13,startLat:52.52,startLng:13.405,endLat:22.3193,endLng:114.1694,arcAlt:0.3,color:pick()},
+  {order:13,startLat:11.986597,startLng:8.571831,endLat:35.6762,endLng:139.6503,arcAlt:0.3,color:pick()},
+  {order:13,startLat:-22.9068,startLng:-43.1729,endLat:-34.6037,endLng:-58.3816,arcAlt:0.1,color:pick()},
+  {order:14,startLat:-33.936138,startLng:18.436529,endLat:21.395643,endLng:39.883798,arcAlt:0.3,color:pick()},
+];
+
+function genRandomNumbers(min, max, count){
+  const arr = [];
+  while (arr.length < count){ const r = Math.floor(Math.random()*(max-min))+min; if (arr.indexOf(r)===-1) arr.push(r); }
+  return arr;
+}
+
+const el = document.getElementById('globeViz');
+const errEl = document.getElementById('globeErr');
+
+function build(countries){
+  const W = el.clientWidth || 500, H = el.clientHeight || 500;
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H);
+  el.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  scene.add(new THREE.AmbientLight(new THREE.Color(globeConfig.ambientLight), 0.6));
+  const d1 = new THREE.DirectionalLight(new THREE.Color(globeConfig.directionalLeftLight), 1); d1.position.set(-400,100,400); scene.add(d1);
+  const d2 = new THREE.DirectionalLight(new THREE.Color(globeConfig.directionalTopLight), 1); d2.position.set(-200,500,200); scene.add(d2);
+  const pl = new THREE.PointLight(new THREE.Color(globeConfig.pointLight), 0.8); pl.position.set(-200,500,200); scene.add(pl);
+
+  const camera = new THREE.PerspectiveCamera(50, W/H, 180, 1800);
+  camera.position.z = 300;
+
+  const Globe = new ThreeGlobe();
+  Globe.hexPolygonsData(countries.features)
+    .hexPolygonResolution(3).hexPolygonMargin(0.7)
+    .showAtmosphere(globeConfig.showAtmosphere)
+    .atmosphereColor(globeConfig.atmosphereColor)
+    .atmosphereAltitude(globeConfig.atmosphereAltitude)
+    .hexPolygonColor(() => globeConfig.polygonColor);
+
+  const mat = Globe.globeMaterial();
+  mat.color = new THREE.Color(globeConfig.globeColor);
+  mat.emissive = new THREE.Color(globeConfig.emissive);
+  mat.emissiveIntensity = globeConfig.emissiveIntensity;
+  mat.shininess = globeConfig.shininess;
+
+  // points from arc endpoints (deduped)
+  const pts = [];
+  arcs.forEach(a => { pts.push({order:a.order,color:a.color,lat:a.startLat,lng:a.startLng});
+                      pts.push({order:a.order,color:a.color,lat:a.endLat,lng:a.endLng}); });
+  const points = pts.filter((v,i,a)=> a.findIndex(v2 => v2.lat===v.lat && v2.lng===v.lng)===i);
+
+  Globe.arcsData(arcs)
+    .arcStartLat(d=>d.startLat).arcStartLng(d=>d.startLng)
+    .arcEndLat(d=>d.endLat).arcEndLng(d=>d.endLng)
+    .arcColor(d=>d.color).arcAltitude(d=>d.arcAlt)
+    .arcStroke(() => [0.32,0.28,0.3][Math.round(Math.random()*2)])
+    .arcDashLength(globeConfig.arcLength).arcDashInitialGap(d=>d.order)
+    .arcDashGap(15).arcDashAnimateTime(() => globeConfig.arcTime);
+
+  Globe.pointsData(points).pointColor(d=>d.color).pointsMerge(true).pointAltitude(0.0).pointRadius(2);
+
+  Globe.ringsData([])
+    .ringColor(() => (t) => 'rgba(255,255,255,' + (1-t) + ')')
+    .ringMaxRadius(globeConfig.maxRings).ringPropagationSpeed(3)
+    .ringRepeatPeriod((globeConfig.arcTime * globeConfig.arcLength) / globeConfig.rings);
+
+  Globe.rotateY(-Math.PI * (5/9));
+  Globe.rotateZ(-Math.PI / 6);
+  scene.add(Globe);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true; controls.dampingFactor = 0.08;
+  controls.enablePan = false; controls.enableZoom = false;
+  controls.autoRotate = globeConfig.autoRotate; controls.autoRotateSpeed = globeConfig.autoRotateSpeed;
+  controls.minPolarAngle = Math.PI / 3.5; controls.maxPolarAngle = Math.PI - Math.PI / 3;
+
+  setInterval(() => {
+    const n = genRandomNumbers(0, arcs.length, Math.floor((arcs.length * 4) / 5));
+    Globe.ringsData(arcs.filter((d,i) => n.indexOf(i) !== -1));
+  }, 2000);
+
+  function animate(){ controls.update(); renderer.render(scene, camera); requestAnimationFrame(animate); }
+  animate();
+
+  window.addEventListener('resize', () => {
+    const w = el.clientWidth, h = el.clientHeight;
+    camera.aspect = w/h; camera.updateProjectionMatrix(); renderer.setSize(w, h);
+  });
+}
+
+fetch('https://unpkg.com/three-globe@2.31.0/example/country-polygons/ne_110m_admin_0_countries.geojson')
+  .then(r => { if(!r.ok) throw new Error('countries '+r.status); return r.json(); })
+  .then(build)
+  .catch(e => { if(errEl) errEl.textContent = 'Globe needs to be served over http(s) — works on the deployed site.'; console.error(e); });
+</script>
+</body>
+</html>
