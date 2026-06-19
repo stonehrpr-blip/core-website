@@ -173,7 +173,7 @@
   .snum{font-family:var(--head);font-size:60px;font-weight:800;line-height:1.12;margin-bottom:14px;padding-bottom:.06em;
     background:linear-gradient(96deg,#A66BF0,#D24A93 60%,#9A63F0);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
     filter:drop-shadow(0 4px 24px rgba(164,92,234,0.30))}
-  .step h3{font-size:22px;font-weight:600;margin-bottom:11px}
+  .step h3{font-size:22px;font-weight:600;margin-bottom:11px;min-height:2.2em}
   .step p{color:var(--muted);font-weight:400;font-size:15.5px;line-height:1.65;max-width:30ch;margin:0 auto}
   .step{position:relative}
   /* thin arrow between steps (not behind them) — sits in the gap, aligned with the number */
@@ -365,6 +365,7 @@
   }
   @media(max-width:680px){
     .steps{grid-template-columns:1fr;gap:48px;max-width:340px}
+    .step h3{min-height:0}
     /* arrows point downward between stacked steps */
     .step:not(:last-child)::after{top:auto;bottom:-32px;right:auto;left:50%;transform:translate(-50%,0) rotate(90deg)}
   }
@@ -655,7 +656,7 @@
     <div class="foot-brand">
       <div class="logo-slot" style="width:52px;height:52px"><img src="assets/app-icon.png" alt="CORE" /></div>
       <div class="wm">CORE</div>
-      <p>Your ultimate plan to lock in and reset your life — only within 60 days.</p>
+      <p>Your ultimate plan to lock in and reset your life in 60 days.</p>
       <a class="store" href="#" aria-label="Download on the App Store" style="display:inline-flex">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
         <span class="lbl"><small>Download on the</small><b>App Store</b></span>
