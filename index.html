@@ -682,10 +682,15 @@
 (function(){
   "use strict";
 
-  /* ---- always start at the top on load/refresh (no scroll restore), then play the load-in ---- */
+  /* ---- always start at the top on load/refresh (no scroll restore, ignore any anchor hash) ---- */
   if('scrollRestoration' in history){ history.scrollRestoration='manual'; }
-  window.scrollTo(0,0);
-  window.addEventListener('load',function(){ window.scrollTo(0,0); });
+  // a stale #section hash makes a refresh deep-jump — strip it so we always open at the top
+  if(window.location.hash){ try{ history.replaceState(null,'',window.location.pathname+window.location.search); }catch(e){} }
+  function toTop(){ try{ window.scrollTo({top:0,left:0,behavior:'instant'}); }catch(e){ window.scrollTo(0,0); } }
+  toTop();
+  window.addEventListener('load',function(){ toTop(); requestAnimationFrame(toTop); });
+  // pageshow with persisted=true = restored from back/forward cache (where 'load' won't refire)
+  window.addEventListener('pageshow',function(e){ if(e.persisted){ toTop(); } });
   document.documentElement.classList.add('loaded');
 
   /* ---- site-wide starfield: scatter stars across the viewport ---- */
