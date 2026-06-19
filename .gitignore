@@ -2,3 +2,6 @@
 *.log
 Thumbs.db
 .vscode/
+
+# social-media post assets (not part of the site)
+assets/posts/

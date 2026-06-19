@@ -4,13 +4,13 @@
 <meta charset="utf-8" />
 <title>CORE — Enter your core.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="CORE — your ultimate plan to lock in and reset your life. Quit bad habits, climb one Life Score, and let an AI coach hold the line. Download for iPhone and Android." />
+<meta name="description" content="CORE — your ultimate plan to lock in and reset your life. Quit bad habits, climb one Life Score, and let an AI coach hold the line. Coming soon to iPhone and Android — join the launch list." />
 <meta name="theme-color" content="#050507" />
 <link rel="icon" href="favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
 <meta property="og:title" content="CORE — Enter your core." />
-<meta property="og:description" content="Quit bad habits, climb one Life Score, reset your life. Download for iPhone and Android." />
+<meta property="og:description" content="Quit bad habits, climb one Life Score, reset your life. Coming soon to iPhone and Android — join the launch list." />
 <meta property="og:image" content="assets/logo-512.png" />
 <meta property="og:type" content="website" />
 <!-- Apple system font (San Francisco) renders natively via -apple-system; no web font needed -->
@@ -126,7 +126,11 @@
   .hero .sub{font-size:clamp(17px,2.1vw,21px);color:var(--muted);font-weight:400;max-width:600px;margin:30px auto 0;line-height:1.6}
 
   /* store badges */
-  .stores{display:flex;gap:16px;margin-top:48px;flex-wrap:wrap;justify-content:center}
+  .store-soon{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border:1px solid rgba(164,92,234,.32);border-radius:99px;
+    font-size:12.5px;color:#D9C2FF;background:rgba(164,92,234,.08);font-family:var(--head);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .store-soon .dot{width:7px;height:7px;border-radius:50%;background:#FFB3D9;box-shadow:0 0 8px #FFB3D9}
+  .stores{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap;justify-content:center}
+  .store[aria-disabled="true"]{cursor:default}
   .store{display:inline-flex;align-items:center;gap:12px;padding:13px 22px;border-radius:13px;background:#fff;color:#000;
     transition:transform .18s ease,box-shadow .25s ease;box-shadow:0 8px 30px rgba(0,0,0,.5)}
   .store:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.6)}
@@ -219,7 +223,7 @@
   .globe-glow{position:absolute;inset:-4%;border-radius:50%;
     background:radial-gradient(circle at 50% 45%,rgba(164,92,234,.22),rgba(199,79,151,.13) 48%,transparent 68%);filter:blur(26px)}
   .globe-dots{position:absolute;inset:0;width:100%;height:100%;z-index:1}
-  .globe-rim{position:absolute;inset:7%;border-radius:50%;z-index:1;pointer-events:none;
+  .globe-rim{position:absolute;inset:12%;border-radius:50%;z-index:1;pointer-events:none;
     box-shadow:inset 0 0 70px rgba(164,92,234,.22),inset 0 0 18px rgba(199,79,151,.18),0 0 50px rgba(164,92,234,.14)}
   .globe-svg{position:absolute;inset:0;z-index:2;width:100%;height:100%;overflow:visible}
   .g-arc{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:240;stroke-dashoffset:240;opacity:0;animation:gdraw 4.6s ease-in-out infinite}
@@ -316,6 +320,25 @@
   .sbtn svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
   @keyframes spin{to{transform:rotate(360deg)}}
 
+  /* ===== launch notify (email capture) ===== */
+  .notify-form{display:flex;gap:10px;max-width:460px;margin:0 auto 6px;flex-wrap:wrap;justify-content:center}
+  .notify-form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .notify-form input[type=email]{flex:1;min-width:220px;background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:15px 18px;color:var(--text);font-family:var(--body);font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}
+  .notify-form input[type=email]::placeholder{color:var(--dim)}
+  .notify-form input[type=email]:focus{border-color:rgba(164,92,234,.55);box-shadow:0 0 0 4px rgba(164,92,234,.12)}
+  .notify-btn{flex-shrink:0;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    min-width:188px;height:52px;padding:0 26px;border:none;border-radius:14px;cursor:pointer;
+    background:linear-gradient(96deg,#A45CEA,#C74F97);color:#fff;font-family:var(--head);font-weight:600;font-size:15px;
+    transition:transform .15s,box-shadow .25s,background .35s;box-shadow:0 12px 32px rgba(164,92,234,.34)}
+  .notify-btn:hover{transform:translateY(-1px);box-shadow:0 16px 40px rgba(164,92,234,.45)}
+  .notify-btn:disabled{cursor:default;transform:none}
+  .notify-btn.loading{background:#23252f;box-shadow:none}
+  .notify-btn.success{background:#22C55E;box-shadow:0 12px 32px rgba(34,197,94,.35)}
+  .notify-btn .spinner{width:19px;height:19px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+  .notify-btn svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  @media(max-width:480px){.notify-form input[type=email],.notify-btn{width:100%;min-width:0}}
+
   /* benefit cards: 2x2 grid; stack to one column on phones */
   @media(max-width:600px){
     .showcase-card{grid-template-columns:1fr;max-width:380px;gap:18px}
@@ -397,6 +420,7 @@
     <h1 class="reveal d1">Enter your core,<br>level up.</h1>
     <p class="sub reveal d2">Most apps reward a fake perfect streak. CORE rewards the <span style="color:#FFB3D9">honest</span> one.</p>
 
+    <div class="store-soon reveal d3" style="margin-top:44px"><span class="dot"></span>Coming soon · iOS &amp; Android</div>
     <div class="stores reveal d3">
       <a class="store" href="#" aria-label="Download on the App Store">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
@@ -481,27 +505,10 @@
       <h2>Built for anywhere.</h2>
       <p>Your habits, your score, and your AI coach go with you, wherever you are.</p>
     </div>
-    <div class="geo-stat reveal d1">
-      <b>175</b>
-      <span>countries at launch</span>
-      <div class="geo-roller">live in <span class="roll" id="geoRoll">the United States</span></div>
-    </div>
-    <div class="globe-wrap reveal d2">
+    <div class="globe-wrap reveal d1">
       <div class="globe-glow"></div>
       <canvas class="globe-dots" id="globeDots" width="760" height="760" aria-hidden="true"></canvas>
       <div class="globe-rim"></div>
-      <svg class="globe-svg" viewBox="0 0 400 400" aria-hidden="true">
-        <path class="g-arc" d="M118,128 Q210,30 296,150" stroke="#A45CEA"/>
-        <path class="g-arc" d="M96,224 Q220,70 300,128" stroke="#C74F97" style="animation-delay:-1.5s"/>
-        <path class="g-arc" d="M150,300 Q250,210 304,236" stroke="#FF8FCB" style="animation-delay:-3s"/>
-        <path class="g-arc" d="M104,180 Q190,300 286,272" stroke="#B488FF" style="animation-delay:-2.3s"/>
-        <circle class="g-ping" cx="118" cy="128" r="4" fill="#A45CEA"/>
-        <circle class="g-ping" cx="296" cy="150" r="4" fill="#A45CEA"/>
-        <circle class="g-ping" cx="96" cy="224" r="4" fill="#C74F97" style="animation-delay:-1.5s"/>
-        <circle class="g-ping" cx="300" cy="128" r="4" fill="#C74F97" style="animation-delay:-1.5s"/>
-        <circle class="g-ping" cx="150" cy="300" r="4" fill="#FF8FCB" style="animation-delay:-3s"/>
-        <circle class="g-ping" cx="304" cy="236" r="4" fill="#FF8FCB" style="animation-delay:-3s"/>
-      </svg>
     </div>
   </div>
 </section>
@@ -512,17 +519,17 @@
     <div class="sec-head reveal">
       <span class="pill">Pricing</span>
       <h2>One plan. Everything in.</h2>
-      <p>Founder pricing for early members — lock it in before launch.</p>
+      <p id="priceSubhead">Start for just <span style="color:#FFB3D9;font-weight:600">$0.99</span> your first month, then $4.99/month — auto-renews until you cancel.</p>
     </div>
     <div class="price-toggle reveal d1" id="priceToggle">
       <button class="pt-opt active" data-plan="monthly">Monthly</button>
       <button class="pt-opt" data-plan="annual">Annual <span class="pt-save">Save 33%</span></button>
     </div>
     <div class="price-card reveal d2">
-      <div class="price-badge">Founder pricing</div>
+      <div class="price-badge">$0.99 first month</div>
       <div class="price-name">Core Pro</div>
-      <div class="price-amt"><b id="priceAmt">$4.99</b><span id="pricePer">/ month</span></div>
-      <div class="price-sub" id="priceSub">Billed monthly · cancel anytime</div>
+      <div class="price-amt"><b id="priceAmt">$0.99</b><span id="pricePer">first month</span></div>
+      <div class="price-sub" id="priceSub">then $4.99/month · auto-renews until cancelled</div>
       <ul class="price-list">
         <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>AI coach that knows your history</li>
         <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Every habit, vice &amp; quest — no limits</li>
@@ -531,7 +538,7 @@
         <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Every future season drop included</li>
       </ul>
       <a class="price-cta" href="#download">Start your reset</a>
-      <div class="price-note">Cancel anytime · no commitment</div>
+      <div class="price-note">Auto-renews until cancelled · cancel anytime in your App Store or Google Play settings</div>
     </div>
   </div>
 </section>
@@ -546,24 +553,24 @@
     </div>
     <div class="faq reveal d1" id="faqList">
       <div class="faq-item open">
-        <button class="faq-q" aria-expanded="true">What is CORE and how can it help me?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p>CORE is a habit app that does the opposite of the others: instead of rewarding a perfect streak you can fake, it rewards honesty — log slips truthfully, prove tasks with photos, and it all rolls into one Life Score, with an AI coach that remembers your whole history.</p></div></div>
+        <button class="faq-q" id="faq-q-1" aria-expanded="true" aria-controls="faq-a-1">What is CORE and how can it help me?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1" aria-hidden="false"><div class="faq-a-inner"><p>CORE is a habit app that does the opposite of the others: instead of rewarding a perfect streak you can fake, it rewards honesty — log slips truthfully, prove tasks with photos, and it all rolls into one Life Score, with an AI coach that remembers your whole history.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How does the AI coach work?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p>It reads your streak, slips and stats to respond in context, and you choose its tone. It knows what page you're on and remembers what you're working on — so it says the one thing you actually need.</p></div></div>
+        <button class="faq-q" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">How does the AI coach work?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2" aria-hidden="true"><div class="faq-a-inner"><p>It reads your streak, slips and stats to respond in context, and you choose its tone. It knows what page you're on and remembers what you're working on — so it says the one thing you actually need.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Can CORE help me quit any habit?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p>Yes. Vape, weed, doom-scroll, drink, spending, junk food — it's built around proving real tasks and honest slip-logging, so it works for any vice or goal.</p></div></div>
+        <button class="faq-q" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">Can CORE help me quit any habit?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3" aria-hidden="true"><div class="faq-a-inner"><p>Yes. Vape, weed, doom-scroll, drink, spending, junk food — it's built around proving real tasks and honest slip-logging, so it works for any vice or goal.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Will CORE help me be more productive?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p>That's the point. Block distractions, log slips honestly, climb your score, and follow a 60-day plan that's customised to your level — so progress is always earned, never faked.</p></div></div>
+        <button class="faq-q" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">Will CORE help me be more productive?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4" aria-hidden="true"><div class="faq-a-inner"><p>That's the point. Block distractions, log slips honestly, climb your score, and follow a 60-day plan that's customised to your level — so progress is always earned, never faked.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Does CORE track my activity?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p>Only what you choose. CORE is private by default, we never sell your data, and social features are fully opt-in. You can export everything any time.</p></div></div>
+        <button class="faq-q" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">Does CORE track my activity?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5" aria-hidden="true"><div class="faq-a-inner"><p>Only what you choose. CORE is private by default, we never sell your data, and social features are fully opt-in. You'll be able to export or delete your data anytime — or just email us to request it.</p></div></div>
       </div>
     </div>
   </div>
@@ -599,7 +606,17 @@
   <div class="wrap">
     <h2 class="reveal">Stop faking it.<br>Start proving it.</h2>
     <p class="reveal d1">Quit the vape, the scroll, the spend — log it honestly, climb one Life Score, and let a coach who knows your history hold the line.</p>
-    <div class="stores reveal d2" style="margin-top:0">
+    <form class="notify-form reveal d2" id="notifyForm">
+      <input type="email" name="email" placeholder="you@email.com" autocomplete="email" aria-label="Your email for launch updates" required />
+      <button type="submit" class="notify-btn" id="notifyBtn"><span class="nf-label">Notify me at launch</span></button>
+      <input type="hidden" name="_subject" value="CORE early-access signup" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    </form>
+    <div class="form-msg" id="notifyMsg" aria-live="polite" style="margin-bottom:16px"></div>
+    <div class="store-soon reveal d3" style="margin-bottom:18px"><span class="dot"></span>Coming soon · iOS &amp; Android</div>
+    <div class="stores reveal d3" style="margin-top:0">
       <a class="store" href="#" aria-label="Download on the App Store">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
         <span class="lbl"><small>Download on the</small><b>App Store</b></span>
@@ -685,9 +702,9 @@
 
   /* ---- hamburger menu ---- */
   var tg=document.getElementById('navToggle'),menu=document.getElementById('menu');
-  tg.setAttribute('aria-expanded','false'); tg.setAttribute('aria-controls','menu');
-  tg.addEventListener('click',function(){var o=menu.classList.toggle('open');tg.setAttribute('aria-expanded',o?'true':'false');});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');tg.setAttribute('aria-expanded','false');});});
+  tg.setAttribute('aria-expanded','false'); tg.setAttribute('aria-controls','menu'); menu.inert=true;
+  tg.addEventListener('click',function(){var o=menu.classList.toggle('open');tg.setAttribute('aria-expanded',o?'true':'false');menu.inert=!o;});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');tg.setAttribute('aria-expanded','false');menu.inert=true;});});
 
   /* ---- reveal on scroll ---- */
   var io=new IntersectionObserver(function(entries){
@@ -732,13 +749,16 @@
   /* ---- FAQ accordion: one open at a time, animated ---- */
   var faqList=document.getElementById('faqList');
   if(faqList){
+    function faqSync(item){ var p=item.querySelector('.faq-a'); if(p) p.setAttribute('aria-hidden', item.classList.contains('open')?'false':'true'); }
+    faqList.querySelectorAll('.faq-item').forEach(faqSync);
     faqList.querySelectorAll('.faq-q').forEach(function(q){
       q.addEventListener('click',function(){
         var item=q.parentElement, isOpen=item.classList.contains('open');
         faqList.querySelectorAll('.faq-item.open').forEach(function(o){
-          o.classList.remove('open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false');
+          o.classList.remove('open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false'); faqSync(o);
         });
         if(!isOpen){ item.classList.add('open'); q.setAttribute('aria-expanded','true'); }
+        faqSync(item);
       });
     });
   }
@@ -747,78 +767,105 @@
   var priceToggle=document.getElementById('priceToggle');
   if(priceToggle){
     var PLANS={
-      monthly:{amt:'$4.99', per:'/ month', sub:'Billed monthly · cancel anytime'},
-      annual: {amt:'$3.33', per:'/ month', sub:'$39.99 billed yearly · cancel anytime'}
+      monthly:{amt:'$0.99', per:'first month', sub:'then $4.99/month · auto-renews until cancelled', badge:'$0.99 first month',
+        head:'Start for just <span style="color:#FFB3D9;font-weight:600">$0.99</span> your first month, then $4.99/month — auto-renews until you cancel.'},
+      annual: {amt:'$3.33', per:'/ month', sub:'$39.99 billed yearly · auto-renews until cancelled', badge:'Save 33% · annual',
+        head:'Get a full year for <span style="color:#FFB3D9;font-weight:600">$39.99</span> — about $3.33 a month, auto-renews until you cancel.'}
     };
-    var pAmt=document.getElementById('priceAmt'), pPer=document.getElementById('pricePer'), pSub=document.getElementById('priceSub');
+    var pAmt=document.getElementById('priceAmt'), pPer=document.getElementById('pricePer'), pSub=document.getElementById('priceSub'), pBadge=document.querySelector('.price-badge'), pHead=document.getElementById('priceSubhead');
     priceToggle.querySelectorAll('.pt-opt').forEach(function(b){
       b.addEventListener('click',function(){
         priceToggle.querySelectorAll('.pt-opt').forEach(function(o){o.classList.remove('active');});
         b.classList.add('active');
         var p=PLANS[b.dataset.plan];
         pAmt.textContent=p.amt; pPer.textContent=p.per; pSub.textContent=p.sub;
+        if(pBadge) pBadge.textContent=p.badge;
+        if(pHead) pHead.innerHTML=p.head;
       });
     });
   }
 
-  /* ---- globe section: cycle through country names ---- */
-  var geoRoll=document.getElementById('geoRoll');
-  if(geoRoll && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    var geoList=['the United States','Japan','Brazil','Germany','Australia','South Korea','Nigeria','India','Mexico','the UK','France','Canada'];
-    var gi=0;
-    setInterval(function(){
-      geoRoll.classList.add('out');
-      setTimeout(function(){
-        gi=(gi+1)%geoList.length;
-        geoRoll.textContent=geoList[gi];
-        geoRoll.classList.remove('out');
-      },280);
-    },2000);
-  }
-
-  /* ---- dot globe: dots mapped onto real continents (2D canvas, pauses off-screen) ---- */
+  /* ---- dot globe: continents + decorative city arcs that ride the rotating globe ---- */
   var gc=document.getElementById('globeDots');
   if(gc){
     var gctx=gc.getContext('2d');
     var gpts=[], gAng=0, gRaf=null, gOn=false, gReady=false;
     var gReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function addPoint(lat,lng){
-      var pr=lat*Math.PI/180, lr=lng*Math.PI/180;
-      gpts.push([Math.cos(pr)*Math.sin(lr), Math.sin(pr), Math.cos(pr)*Math.cos(lr)]);
-    }
+    function ll2v(lat,lng){var pr=lat*Math.PI/180,lr=lng*Math.PI/180;return [Math.cos(pr)*Math.sin(lr),Math.sin(pr),Math.cos(pr)*Math.cos(lr)];}
     function buildFromMask(img){
       var mw=180,mh=90,oc=document.createElement('canvas');oc.width=mw;oc.height=mh;
       var octx=oc.getContext('2d');octx.drawImage(img,0,0,mw,mh);
       var dat=octx.getImageData(0,0,mw,mh).data, step=2;
       for(var py=0;py<mh;py+=step)for(var px=0;px<mw;px+=step){
-        if(dat[(py*mw+px)*4]>110) addPoint(90-(py/mh)*180, (px/mw)*360-180);
+        if(dat[(py*mw+px)*4]>110) gpts.push(ll2v(90-(py/mh)*180,(px/mw)*360-180));
       }
     }
-    function fibFallback(){
-      var N=560;for(var j=0;j<N;j++){var phi=Math.acos(1-2*(j+0.5)/N),th=Math.PI*(1+Math.sqrt(5))*j;
-        gpts.push([Math.sin(phi)*Math.cos(th),Math.cos(phi),Math.sin(phi)*Math.sin(th)]);}
-    }
+    function fibFallback(){var N=560;for(var j=0;j<N;j++){var phi=Math.acos(1-2*(j+0.5)/N),th=Math.PI*(1+Math.sqrt(5))*j;gpts.push([Math.sin(phi)*Math.cos(th),Math.cos(phi),Math.sin(phi)*Math.sin(th)]);}}
+
+    // real cities + connection arcs (great-circle paths, lifted above the surface)
+    var CITY={ny:[40.7,-74],ln:[51.5,-0.13],tk:[35.68,139.65],sp:[-23.55,-46.63],sy:[-33.87,151.21],lg:[6.45,3.4],la:[34.05,-118.24],mb:[19.07,72.88],sg:[1.35,103.82],db:[25.2,55.27],pa:[48.85,2.35],ct:[-33.92,18.42]};
+    var ARCDEF=[['ny','ln','#A45CEA'],['ln','tk','#C74F97'],['la','sy','#FF8FCB'],['sp','lg','#B488FF'],['mb','sg','#A45CEA'],['db','pa','#C74F97'],['tk','la','#FF8FCB'],['ny','sp','#B488FF']];
+    function slerp(a,b,t){var dt=Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2])),om=Math.acos(dt),so=Math.sin(om);
+      if(so<1e-4)return[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];
+      var s1=Math.sin((1-t)*om)/so,s2=Math.sin(t*om)/so;return[a[0]*s1+b[0]*s2,a[1]*s1+b[1]*s2,a[2]*s1+b[2]*s2];}
+    var ARCS=ARCDEF.map(function(d,i){
+      var a=ll2v(CITY[d[0]][0],CITY[d[0]][1]),b=ll2v(CITY[d[1]][0],CITY[d[1]][1]);
+      var om=Math.acos(Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2]))),alt=0.10+(om/Math.PI)*0.19,N=64,path=[];
+      for(var k=0;k<=N;k++){var t=k/N,p=slerp(a,b,t),lf=1+alt*Math.sin(Math.PI*t);path.push([p[0]*lf,p[1]*lf,p[2]*lf]);}
+      return {path:path,color:d[2],phase:i/ARCDEF.length};
+    });
+    var CITIES=Object.keys(CITY).map(function(k){return ll2v(CITY[k][0],CITY[k][1]);});
+
     function gDraw(){
-      var w=gc.width,h=gc.height,cx=w/2,cy=h/2,R=w*0.44;
-      gctx.clearRect(0,0,w,h);
+      var w=gc.width,cx=w/2,cy=w/2,R=w*0.38;
+      gctx.clearRect(0,0,w,w);
       if(!gReady) return;
       if(!gReduced) gAng+=0.0022;
-      var ca=Math.cos(gAng),sa=Math.sin(gAng);
-      for(var i=0;i<gpts.length;i++){
-        var x=gpts[i][0],y=gpts[i][1],z=gpts[i][2];
-        var rx=x*ca-z*sa, rz=x*sa+z*ca;
-        if(rz<-0.05) continue;                  // hide far back hemisphere
-        var d=(rz+1)/2;
-        gctx.globalAlpha=0.1+d*0.8;
-        gctx.fillStyle='#c9a8ff';
+      var ca=Math.cos(gAng),sa=Math.sin(gAng),i;
+      // continents
+      for(i=0;i<gpts.length;i++){
+        var x=gpts[i][0],y=gpts[i][1],z=gpts[i][2], rx=x*ca-z*sa, rz=x*sa+z*ca;
+        if(rz<-0.05) continue;
+        var d=(rz+1)/2; gctx.globalAlpha=0.1+d*0.8; gctx.fillStyle='#c9a8ff';
         gctx.beginPath();gctx.arc(cx+rx*R,cy-y*R,0.6+d*1.7,0,6.2832);gctx.fill();
+      }
+      // city hubs
+      for(i=0;i<CITIES.length;i++){
+        var cv=CITIES[i], crx=cv[0]*ca-cv[2]*sa, crz=cv[0]*sa+cv[2]*ca;
+        if(crz<0) continue;
+        gctx.globalAlpha=0.25+crz*0.5; gctx.fillStyle='#FFB3D9';
+        gctx.beginPath();gctx.arc(cx+crx*R,cy-cv[1]*R,1.5,0,6.2832);gctx.fill();
+      }
+      // live arcs
+      if(!gReduced){
+        var now=(window.performance&&performance.now?performance.now():Date.now())/1000;
+        gctx.lineWidth=2.1; gctx.lineCap='round';
+        for(var ai=0;ai<ARCS.length;ai++){
+          var arc=ARCS[ai], u=((now/5)+arc.phase)%1;
+          if(u>=0.8) continue;
+          var head=Math.min(1,u/0.6), aOut=u<0.6?1:Math.max(0,1-(u-0.6)/0.18);
+          var pth=arc.path, NN=pth.length-1, i0=Math.max(0,Math.floor((head-0.28)*NN)), i1=Math.floor(head*NN), s;
+          gctx.strokeStyle=arc.color;
+          for(s=i0;s<i1;s++){
+            var p=pth[s],q=pth[s+1];
+            var prx=p[0]*ca-p[2]*sa,prz=p[0]*sa+p[2]*ca, qrx=q[0]*ca-q[2]*sa,qrz=q[0]*sa+q[2]*ca;
+            if(prz<0&&qrz<0) continue;
+            gctx.globalAlpha=aOut*(0.3+0.7*Math.max(0,Math.min(1,((prz+qrz)/2+0.4)/1.4)));
+            gctx.beginPath();gctx.moveTo(cx+prx*R,cy-p[1]*R);gctx.lineTo(cx+qrx*R,cy-q[1]*R);gctx.stroke();
+          }
+          var hp=pth[Math.max(0,i1)], hrx=hp[0]*ca-hp[2]*sa, hrz=hp[0]*sa+hp[2]*ca;
+          if(hrz>-0.1&&aOut>0){
+            gctx.fillStyle=arc.color;
+            gctx.globalAlpha=aOut*0.32;gctx.beginPath();gctx.arc(cx+hrx*R,cy-hp[1]*R,7,0,6.2832);gctx.fill();
+            gctx.globalAlpha=aOut;gctx.beginPath();gctx.arc(cx+hrx*R,cy-hp[1]*R,3,0,6.2832);gctx.fill();
+          }
+        }
       }
       gctx.globalAlpha=1;
       if(gOn && !gReduced) gRaf=requestAnimationFrame(gDraw);
     }
     var gimg=new Image();
-    gimg.onload=function(){ try{buildFromMask(gimg);}catch(e){gpts=[];fibFallback();} gReady=true;
-      if(gOn&&!gReduced){if(!gRaf)gRaf=requestAnimationFrame(gDraw);}else gDraw(); };
+    gimg.onload=function(){ try{buildFromMask(gimg);}catch(e){gpts=[];fibFallback();} gReady=true; if(gOn&&!gReduced){if(!gRaf)gRaf=requestAnimationFrame(gDraw);}else gDraw(); };
     gimg.onerror=function(){ fibFallback(); gReady=true; gDraw(); };
     gimg.src='assets/land-mask.png';
     var gIO=new IntersectionObserver(function(es){es.forEach(function(e){
@@ -829,31 +876,43 @@
     gIO.observe(gc);
   }
 
-  /* ---- contact / report form -> emails corestudiosupport@gmail.com via FormSubmit ---- */
-  var form=document.getElementById('reportForm');
-  if(form){
-    var btn=document.getElementById('sendBtn');
-    var msg=document.getElementById('formMsg');
-    var IDLE='<span class="sbtn-label">Send message</span>';
-    var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  /* ---- store buttons are placeholders until launch: don't navigate, mark coming-soon ---- */
+  document.querySelectorAll('a.store').forEach(function(a){
+    if((a.getAttribute('href')||'')==='#'){
+      a.setAttribute('aria-disabled','true');
+      a.setAttribute('title','Coming soon at launch');
+      a.addEventListener('click',function(e){ e.preventDefault(); });
+    }
+  });
+
+  /* ---- FormSubmit-backed forms: contact (report) + launch notify ---- */
+  var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var FS_ENDPOINT='https://formsubmit.co/ajax/corestudiosupport@gmail.com';
+  function wireForm(o){
+    var form=document.getElementById(o.form); if(!form) return;
+    var btn=document.getElementById(o.btn), msg=document.getElementById(o.msg);
+    var IDLE='<span class="'+o.labelClass+'">'+o.idle+'</span>';
     function reset(){ btn.classList.remove('loading','success'); btn.disabled=false; btn.innerHTML=IDLE; }
     form.addEventListener('submit',function(e){
       e.preventDefault();
-      var email=(form.email.value||'').trim(), message=(form.message.value||'').trim();
-      if(form._honey.value){return;}                                  // honeypot -> silently drop bots
+      if(form._honey && form._honey.value){return;}                   // honeypot -> silently drop bots
+      var email=(form.email.value||'').trim();
       if(!EMAIL.test(email)){ msg.textContent='Please enter a valid email.'; msg.className='form-msg err'; form.email.focus(); return; }
-      if(message.length<3){ msg.textContent='Please write a message.'; msg.className='form-msg err'; form.message.focus(); return; }
+      if(o.requireMessage){
+        var message=(form.message.value||'').trim();
+        if(message.length<3){ msg.textContent='Please write a message.'; msg.className='form-msg err'; form.message.focus(); return; }
+      }
       msg.textContent=''; msg.className='form-msg';
       btn.disabled=true; btn.classList.add('loading'); btn.innerHTML='<span class="spinner"></span>';
-      fetch('https://formsubmit.co/ajax/corestudiosupport@gmail.com',{
-        method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form)
-      })
-      .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
-      .then(function(){
+      fetch(FS_ENDPOINT,{ method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form) })
+      .then(function(r){ return r.json().then(function(d){return {ok:r.ok,d:d};},function(){return {ok:r.ok,d:null};}); })
+      .then(function(res){
+        // FormSubmit returns HTTP 200 with {success:"false"} on errors/rate-limits — check the body, not just status
+        if(!res.ok || !res.d || String(res.d.success).toLowerCase()!=='true') throw new Error((res.d&&res.d.message)||'failed');
         btn.classList.remove('loading'); btn.classList.add('success');
-        btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Sent!';
+        btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> '+o.done;
         form.reset();
-        msg.textContent='Thanks — we’ll get back to you soon.'; msg.className='form-msg ok';
+        msg.textContent=o.doneMsg; msg.className='form-msg ok';
         setTimeout(reset,2800);
       })
       .catch(function(){
@@ -862,6 +921,8 @@
       });
     });
   }
+  wireForm({form:'reportForm',btn:'sendBtn',msg:'formMsg',labelClass:'sbtn-label',idle:'Send message',done:'Sent!',doneMsg:'Thanks — we’ll get back to you soon.',requireMessage:true});
+  wireForm({form:'notifyForm',btn:'notifyBtn',msg:'notifyMsg',labelClass:'nf-label',idle:'Notify me at launch',done:'You’re on the list!',doneMsg:'Nice — we’ll email you the moment CORE launches.',requireMessage:false});
 })();
 </script>
 
