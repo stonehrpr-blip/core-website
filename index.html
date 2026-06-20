@@ -56,7 +56,7 @@
   /* reveal on scroll */
   .reveal{opacity:0;transform:translateY(34px) scale(.99);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
   .reveal.in{opacity:1;transform:none}
-  .reveal.d1{transition-delay:.09s}.reveal.d2{transition-delay:.18s}.reveal.d3{transition-delay:.27s}
+  .reveal.d1{transition-delay:.09s}.reveal.d2{transition-delay:.18s}.reveal.d3{transition-delay:.27s}.reveal.d4{transition-delay:.36s}
 
   /* ===== nav ===== */
   /* resizable navbar — full-width at top, shrinks into a floating pill on scroll */
@@ -159,12 +159,13 @@
   .pill{display:inline-flex;align-items:center;padding:8px 18px;border:1px solid rgba(164,92,234,.32);border-radius:11px;
     font-size:14px;color:#D9C2FF;background:rgba(164,92,234,.08);font-family:var(--head);font-weight:600;letter-spacing:.01em}
   /* ambient section glows for depth */
-  #how::before,#benefits::before,#pricing::before{content:"";position:absolute;z-index:-1;pointer-events:none;
+  #how::before,#benefits::before,#showcase::before,#pricing::before{content:"";position:absolute;z-index:-1;pointer-events:none;
     width:760px;height:520px;max-width:92vw;border-radius:50%;filter:blur(50px);
     background:radial-gradient(circle,rgba(164,92,234,.13),rgba(199,79,151,.06) 46%,transparent 70%)}
   #how::before{top:6%;left:18%}
   #benefits::before{top:20%;right:8%;background:radial-gradient(circle,rgba(199,79,151,.12),rgba(164,92,234,.06) 46%,transparent 70%)}
   #pricing::before{top:14%;left:50%;transform:translateX(-50%)}
+  #showcase::before{top:30%;left:50%;transform:translateX(-50%);width:1000px;height:560px}
   .sec-head{text-align:center;max-width:680px;margin:0 auto 60px}
   .sec-head .pill{margin-bottom:24px}
   .sec-head h2{font-size:clamp(32px,5vw,52px);font-weight:600;letter-spacing:-0.03em;line-height:1.06;margin-bottom:18px}
@@ -225,15 +226,22 @@
   #showcase{text-align:center;overflow:hidden}
   .shots{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;max-width:1080px;margin:0 auto}
   .shot{flex:0 0 auto;width:240px;max-width:44vw;margin:0;transition:transform .4s var(--ease-out)}
-  .shot img{width:100%;height:auto;display:block;border-radius:34px;border:1px solid rgba(255,255,255,.06);
-    box-shadow:0 26px 60px rgba(0,0,0,.6),0 0 44px rgba(164,92,234,.16)}
+  .shot img{width:100%;height:auto;display:block;border-radius:34px;border:1px solid rgba(255,255,255,.06);border-top-color:rgba(255,255,255,.14);
+    box-shadow:0 22px 54px rgba(0,0,0,.5),0 0 44px rgba(164,92,234,.16);transition:box-shadow .4s var(--ease-out)}
   .shot:hover{transform:translateY(-8px)}
+  .shot:hover img{box-shadow:0 34px 70px rgba(0,0,0,.55),0 0 56px rgba(164,92,234,.26)}
+  @media(max-width:700px){
+    .shots{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;scrollbar-width:none;gap:16px;margin:0 -26px;padding:6px 26px 16px;scroll-padding:0 26px}
+    .shots::-webkit-scrollbar{display:none}
+    .shot{width:min(260px,66vw);max-width:none;scroll-snap-align:center}
+  }
 
   /* ===== globe (lightweight SVG — spinning wireframe + arcs) ===== */
   #global{text-align:center;overflow:hidden}
   .globe-wrap{position:relative;width:min(480px,84vw);aspect-ratio:1;margin:32px auto 0}
   .globe-glow{position:absolute;inset:-4%;border-radius:50%;
-    background:radial-gradient(circle at 50% 45%,rgba(164,92,234,.22),rgba(199,79,151,.13) 48%,transparent 68%);filter:blur(26px)}
+    background:radial-gradient(circle at 50% 45%,rgba(164,92,234,.20),rgba(199,79,151,.08) 47%,transparent 69%);filter:blur(26px)}
   .globe-dots{position:absolute;inset:0;width:100%;height:100%;z-index:1}
   .globe-rim{position:absolute;inset:12%;border-radius:50%;z-index:1;pointer-events:none;
     box-shadow:inset 0 0 70px rgba(164,92,234,.22),inset 0 0 18px rgba(199,79,151,.18),0 0 50px rgba(164,92,234,.14)}
@@ -519,9 +527,9 @@
     </div>
     <div class="shots">
       <figure class="shot reveal d1"><img src="assets/screens/dashboard.png" alt="CORE dashboard: a 14-day clean streak with a milestone unlocked" loading="lazy" width="840" height="1820" /></figure>
-      <figure class="shot reveal d1"><img src="assets/screens/coach.png" alt="CORE AI coach chat that knows your history" loading="lazy" width="840" height="1820" /></figure>
-      <figure class="shot reveal d2"><img src="assets/screens/habit.png" alt="CORE habit tracking screen" loading="lazy" width="840" height="1820" /></figure>
-      <figure class="shot reveal d2"><img src="assets/screens/ranks.png" alt="CORE ranks and Life Score progression" loading="lazy" width="840" height="1820" /></figure>
+      <figure class="shot reveal d2"><img src="assets/screens/coach.png" alt="CORE AI coach chat that knows your history" loading="lazy" width="840" height="1820" /></figure>
+      <figure class="shot reveal d3"><img src="assets/screens/habit.png" alt="CORE habit tracking screen" loading="lazy" width="840" height="1820" /></figure>
+      <figure class="shot reveal d4"><img src="assets/screens/ranks.png" alt="CORE ranks and Life Score progression" loading="lazy" width="840" height="1820" /></figure>
     </div>
   </div>
 </section>
