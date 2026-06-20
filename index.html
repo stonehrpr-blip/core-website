@@ -9,6 +9,7 @@
 <link rel="icon" href="favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
 <meta property="og:title" content="CORE — Enter your core." />
 <meta property="og:description" content="Quit bad habits, climb one Life Score, reset your life. Coming soon to iPhone and Android — join the launch list." />
 <meta property="og:image" content="assets/logo-512.png" />
@@ -16,7 +17,7 @@
 <!-- Apple system font (San Francisco) renders natively via -apple-system; no web font needed -->
 <style>
   :root{
-    --bg:#050507; --text:#F4F6FB; --muted:#9A9CAB; --dim:#6A6E7E;
+    --bg:#050507; --text:#F4F6FB; --muted:#9A9CAB; --dim:#868A99;
     --accent:#A45CEA; --accent2:#C74F97;
     --indigo:#8B53F0;                 /* hero/footer glow tint */
     --border:rgba(255,255,255,0.08);
@@ -45,6 +46,8 @@
   ::selection{background:rgba(164,92,234,.32);color:#fff;text-shadow:none}
   ::-moz-selection{background:rgba(164,92,234,.32);color:#fff;text-shadow:none}
   a{color:inherit;text-decoration:none}
+  .skip{position:absolute;left:-9999px;top:0;z-index:1000}
+  .skip:focus{left:12px;top:12px;padding:10px 16px;background:#1a1030;color:#fff;border-radius:10px;outline:2px solid #B488FF;font-family:var(--head);font-weight:600;font-size:14px}
   img,video{max-width:100%;display:block}
   h1,h2,h3{font-family:var(--head);margin:0;font-weight:700;letter-spacing:-0.022em;line-height:1.08;text-wrap:balance}
   button{font-family:inherit}
@@ -180,18 +183,13 @@
   .step:not(:last-child)::after{content:"";position:absolute;top:30px;right:-40px;width:46px;height:14px;transform:translateY(-50%);
     background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='14' viewBox='0 0 46 14' fill='none' stroke='%236A6E7E' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 7h40M37 2l5 5-5 5'/%3E%3C/svg%3E");opacity:.7}
 
-  /* ===== benefits phone showcase ===== */
-  /* Reload-style: boxed feature cards both sides, phone centred, glow behind, no outer box */
+  /* ===== benefits showcase ===== */
+  /* boxed 2x2 feature-card grid with a soft glow behind, no outer box */
   .showcase-card{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;max-width:900px;margin:0 auto;z-index:2}
   .showcase-card::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
     width:540px;height:700px;max-width:90%;border-radius:50%;
     background:radial-gradient(circle,rgba(164,92,234,0.18),rgba(199,79,151,0.06) 45%,transparent 68%);
     filter:blur(50px);z-index:-1;pointer-events:none}
-  /* device frame around the static app screenshot (screenshot has no bezel of its own) */
-  .phone{position:relative;width:300px;max-width:72vw;padding:11px;border-radius:54px;
-    background:#08080b;border:1px solid #2a2c36;box-shadow:0 44px 120px rgba(0,0,0,.78);will-change:transform}
-  .phone img{width:100%;height:auto;display:block;border-radius:44px}
-
   /* boxed feature cards — clean 2x2 grid, equal height */
   .sidefeat{background:var(--card);border:1px solid var(--border);border-top-color:rgba(255,255,255,0.13);border-bottom-color:rgba(255,255,255,0.05);border-radius:20px;padding:32px 28px;height:100%;
     box-shadow:0 10px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.05);
@@ -225,27 +223,12 @@
 
   /* ===== globe (lightweight SVG — spinning wireframe + arcs) ===== */
   #global{text-align:center;overflow:hidden}
-  .geo-stat{display:flex;flex-direction:column;align-items:center;gap:4px;margin:38px auto 0}
-  .geo-stat b{font-family:var(--head);font-weight:800;font-size:clamp(56px,9vw,92px);line-height:1;letter-spacing:-0.04em;
-    background:linear-gradient(100deg,#B488FF 0%,#FFC4E6 50%,#FF8FCB 100%);-webkit-background-clip:text;background-clip:text;
-    color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 6px 30px rgba(164,92,234,.35))}
-  .geo-stat span{color:var(--muted);font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
-  .geo-roller{margin-top:16px;color:var(--muted);font-family:var(--head);font-weight:500;font-size:16px;display:inline-flex;gap:7px;align-items:baseline;justify-content:center}
-  .geo-roller .roll{color:#FFB3D9;font-weight:700;display:inline-block;min-width:8.5ch;text-align:left;
-    transition:opacity .28s ease,transform .28s ease}
-  .geo-roller .roll.out{opacity:0;transform:translateY(-8px)}
   .globe-wrap{position:relative;width:min(480px,84vw);aspect-ratio:1;margin:32px auto 0}
   .globe-glow{position:absolute;inset:-4%;border-radius:50%;
     background:radial-gradient(circle at 50% 45%,rgba(164,92,234,.22),rgba(199,79,151,.13) 48%,transparent 68%);filter:blur(26px)}
   .globe-dots{position:absolute;inset:0;width:100%;height:100%;z-index:1}
   .globe-rim{position:absolute;inset:12%;border-radius:50%;z-index:1;pointer-events:none;
     box-shadow:inset 0 0 70px rgba(164,92,234,.22),inset 0 0 18px rgba(199,79,151,.18),0 0 50px rgba(164,92,234,.14)}
-  .globe-svg{position:absolute;inset:0;z-index:2;width:100%;height:100%;overflow:visible}
-  .g-arc{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:240;stroke-dashoffset:240;opacity:0;animation:gdraw 4.6s ease-in-out infinite}
-  @keyframes gdraw{0%{stroke-dashoffset:240;opacity:0}12%{opacity:1}50%{stroke-dashoffset:0;opacity:1}80%{stroke-dashoffset:0;opacity:0}100%{opacity:0}}
-  .g-ping{transform-box:fill-box;transform-origin:center;animation:gping 4.6s ease-in-out infinite}
-  @keyframes gping{0%,100%{opacity:0;transform:scale(.4)}18%{opacity:1;transform:scale(1)}80%{opacity:0;transform:scale(1.7)}}
-
   /* ===== pricing ===== */
   #pricing{text-align:center}
   .price-toggle{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--border);border-radius:99px;background:var(--card);margin:32px auto 0}
@@ -387,12 +370,12 @@
     body{animation:none}
     .faq-a{transition:none}
     .beam{display:none}
-    .g-mer,.g-ping{animation:none}
-    .g-arc{animation:none;stroke-dashoffset:0;opacity:.5}
   }
 </style>
 </head>
 <body>
+
+<a class="skip" href="#top">Skip to content</a>
 
 <nav id="nav">
   <div class="nav-inner">
@@ -402,11 +385,12 @@
       <a href="#benefits">Benefits</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
     </div>
     <div class="nav-right">
       <a href="#download" class="nav-cta">Download</a>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
       </button>
     </div>
   </div>
@@ -443,11 +427,11 @@
     <div class="store-soon reveal d3" style="margin-top:44px"><span class="dot"></span>Coming soon · iOS &amp; Android</div>
     <div class="stores reveal d3">
       <a class="store" href="#" aria-label="Download on the App Store">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#000" aria-hidden="true" focusable="false"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
         <span class="lbl"><small>Download on the</small><b>App Store</b></span>
       </a>
       <a class="store" href="#" aria-label="Get it on Google Play">
-        <svg width="24" height="26" viewBox="0 0 24 24"><path d="M3.6 2.2c-.3.3-.5.8-.5 1.4v16.8c0 .6.2 1.1.5 1.4l.1.1L13 12.6v-.2L3.7 2.1l-.1.1z" fill="#00D2FF"/><path d="M16.3 15.7l-3.3-3.3v-.2l3.3-3.3.1.1 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.2-.1.1z" fill="#FFCE00"/><path d="M16.4 15.6L13 12.3 3.6 21.8c.4.4 1 .4 1.7.1l11.1-6.3z" fill="#FF3A44"/><path d="M16.4 9L5.3 2.7c-.7-.4-1.3-.3-1.7.1L13 12.3 16.4 9z" fill="#00F076"/></svg>
+        <svg width="24" height="26" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.6 2.2c-.3.3-.5.8-.5 1.4v16.8c0 .6.2 1.1.5 1.4l.1.1L13 12.6v-.2L3.7 2.1l-.1.1z" fill="#00D2FF"/><path d="M16.3 15.7l-3.3-3.3v-.2l3.3-3.3.1.1 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.2-.1.1z" fill="#FFCE00"/><path d="M16.4 15.6L13 12.3 3.6 21.8c.4.4 1 .4 1.7.1l11.1-6.3z" fill="#FF3A44"/><path d="M16.4 9L5.3 2.7c-.7-.4-1.3-.3-1.7.1L13 12.3 16.4 9z" fill="#00F076"/></svg>
         <span class="lbl"><small>GET IT ON</small><b>Google Play</b></span>
       </a>
     </div>
@@ -494,22 +478,22 @@
 
     <div class="showcase-card reveal d1">
       <div class="sidefeat">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M9.5 2a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 6 16a3 3 0 0 0 3.5 3V2z"/><path d="M14.5 2a3 3 0 0 1 3 3 3 3 0 0 1 2 5.2A3 3 0 0 1 18 16a3 3 0 0 1-3.5 3V2z"/></svg></div>
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 2a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 6 16a3 3 0 0 0 3.5 3V2z"/><path d="M14.5 2a3 3 0 0 1 3 3 3 3 0 0 1 2 5.2A3 3 0 0 1 18 16a3 3 0 0 1-3.5 3V2z"/></svg></div>
         <h3>Rewire your brain</h3>
         <p>Break the cycle of bad habits and doom-scrolling with a 60-day plan tailored to you.</p>
       </div>
       <div class="sidefeat">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg></div>
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg></div>
         <h3>Climb one Life Score</h3>
         <p>Fitness, focus, money, mind and habits roll into one score you can't fake.</p>
       </div>
       <div class="sidefeat">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M9 13a3 3 0 0 1 6 0v1H9z"/><circle cx="12" cy="10.5" r="1"/></svg></div>
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M9 13a3 3 0 0 1 6 0v1H9z"/><circle cx="12" cy="10.5" r="1"/></svg></div>
         <h3>Quit your bad habits</h3>
         <p>Vape, scroll, spend, drink — log it honestly, watch the cost, and quit for good.</p>
       </div>
       <div class="sidefeat">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"/></svg></div>
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"/></svg></div>
         <h3>An AI coach that knows you</h3>
         <p>It reads your streak and stats, then says the one thing you need — in your tone.</p>
       </div>
@@ -551,11 +535,11 @@
       <div class="price-amt"><b id="priceAmt">$0.99</b><span id="pricePer">first month</span></div>
       <div class="price-sub" id="priceSub">then $4.99/month · auto-renews until cancelled</div>
       <ul class="price-list">
-        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>AI coach that knows your history</li>
-        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Every habit, vice &amp; quest — no limits</li>
-        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Full Life Score, all 5 stats &amp; 7 ranks</li>
-        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Streak protection &amp; recovery quests</li>
-        <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Every future season drop included</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"/></svg>AI coach that knows your history</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"/></svg>Every habit, vice &amp; quest — no limits</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"/></svg>Full Life Score, all 5 stats &amp; 7 ranks</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"/></svg>Streak protection &amp; recovery quests</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"/></svg>Every future season drop included</li>
       </ul>
       <a class="price-cta" href="#download">Start your reset</a>
       <div class="price-note">Auto-renews until cancelled · cancel anytime in your App Store or Google Play settings</div>
@@ -573,23 +557,23 @@
     </div>
     <div class="faq reveal d1" id="faqList">
       <div class="faq-item open">
-        <button class="faq-q" id="faq-q-1" aria-expanded="true" aria-controls="faq-a-1">What is CORE and how can it help me?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <button class="faq-q" id="faq-q-1" aria-expanded="true" aria-controls="faq-a-1">What is CORE and how can it help me?<span class="chev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></span></button>
         <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1" aria-hidden="false"><div class="faq-a-inner"><p>CORE is a habit app that does the opposite of the others: instead of rewarding a perfect streak you can fake, it rewards honesty — log slips truthfully, prove tasks with photos, and it all rolls into one Life Score, with an AI coach that remembers your whole history.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">How does the AI coach work?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <button class="faq-q" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">How does the AI coach work?<span class="chev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></span></button>
         <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2" aria-hidden="true"><div class="faq-a-inner"><p>It reads your streak, slips and stats to respond in context, and you choose its tone. It knows what page you're on and remembers what you're working on — so it says the one thing you actually need.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">Can CORE help me quit any habit?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <button class="faq-q" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">Can CORE help me quit any habit?<span class="chev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></span></button>
         <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3" aria-hidden="true"><div class="faq-a-inner"><p>Yes. Vape, weed, doom-scroll, drink, spending, junk food — it's built around proving real tasks and honest slip-logging, so it works for any vice or goal.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">Will CORE help me be more productive?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <button class="faq-q" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">Will CORE help me be more productive?<span class="chev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></span></button>
         <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4" aria-hidden="true"><div class="faq-a-inner"><p>That's the point. Block distractions, log slips honestly, climb your score, and follow a 60-day plan that's customised to your level — so progress is always earned, never faked.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">Does CORE track my activity?<span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <button class="faq-q" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">Does CORE track my activity?<span class="chev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></span></button>
         <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5" aria-hidden="true"><div class="faq-a-inner"><p>Only what you choose. CORE is private by default, we never sell your data, and social features are fully opt-in. You'll be able to export or delete your data anytime — or just email us to request it.</p></div></div>
       </div>
     </div>
@@ -638,11 +622,11 @@
     <div class="store-soon reveal d3" style="margin-bottom:18px"><span class="dot"></span>Coming soon · iOS &amp; Android</div>
     <div class="stores reveal d3" style="margin-top:0">
       <a class="store" href="#" aria-label="Download on the App Store">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#000" aria-hidden="true" focusable="false"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
         <span class="lbl"><small>Download on the</small><b>App Store</b></span>
       </a>
       <a class="store" href="#" aria-label="Get it on Google Play">
-        <svg width="24" height="26" viewBox="0 0 24 24"><path d="M3.6 2.2c-.3.3-.5.8-.5 1.4v16.8c0 .6.2 1.1.5 1.4l.1.1L13 12.6v-.2L3.7 2.1l-.1.1z" fill="#00D2FF"/><path d="M16.3 15.7l-3.3-3.3v-.2l3.3-3.3.1.1 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.2-.1.1z" fill="#FFCE00"/><path d="M16.4 15.6L13 12.3 3.6 21.8c.4.4 1 .4 1.7.1l11.1-6.3z" fill="#FF3A44"/><path d="M16.4 9L5.3 2.7c-.7-.4-1.3-.3-1.7.1L13 12.3 16.4 9z" fill="#00F076"/></svg>
+        <svg width="24" height="26" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.6 2.2c-.3.3-.5.8-.5 1.4v16.8c0 .6.2 1.1.5 1.4l.1.1L13 12.6v-.2L3.7 2.1l-.1.1z" fill="#00D2FF"/><path d="M16.3 15.7l-3.3-3.3v-.2l3.3-3.3.1.1 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.2-.1.1z" fill="#FFCE00"/><path d="M16.4 15.6L13 12.3 3.6 21.8c.4.4 1 .4 1.7.1l11.1-6.3z" fill="#FF3A44"/><path d="M16.4 9L5.3 2.7c-.7-.4-1.3-.3-1.7.1L13 12.3 16.4 9z" fill="#00F076"/></svg>
         <span class="lbl"><small>GET IT ON</small><b>Google Play</b></span>
       </a>
     </div>
@@ -658,7 +642,7 @@
       <div class="wm">CORE</div>
       <p>Your ultimate plan to lock in and reset your life in 60 days.</p>
       <a class="store" href="#" aria-label="Download on the App Store" style="display:inline-flex">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#000" aria-hidden="true" focusable="false"><path d="M16.36 12.86c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.89-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.71 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.6c.64-.78 1.07-1.85.95-2.93-.92.04-2.04.61-2.7 1.38-.59.68-1.11 1.79-.97 2.84 1.03.08 2.08-.52 2.72-1.29z"/></svg>
         <span class="lbl"><small>Download on the</small><b>App Store</b></span>
       </a>
     </div>
@@ -728,8 +712,10 @@
   /* ---- hamburger menu ---- */
   var tg=document.getElementById('navToggle'),menu=document.getElementById('menu');
   tg.setAttribute('aria-expanded','false'); tg.setAttribute('aria-controls','menu'); menu.inert=true;
-  tg.addEventListener('click',function(){var o=menu.classList.toggle('open');tg.setAttribute('aria-expanded',o?'true':'false');menu.inert=!o;});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');tg.setAttribute('aria-expanded','false');menu.inert=true;});});
+  function closeMenu(){ menu.classList.remove('open'); tg.setAttribute('aria-expanded','false'); menu.inert=true; }
+  tg.addEventListener('click',function(){var o=menu.classList.toggle('open');tg.setAttribute('aria-expanded',o?'true':'false');menu.inert=!o; if(o){var first=menu.querySelector('a'); if(first) first.focus();}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ closeMenu(); tg.focus(); } });
 
   /* ---- reveal on scroll ---- */
   var io=new IntersectionObserver(function(entries){
@@ -737,8 +723,7 @@
   },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal, .sidefeat').forEach(function(el){io.observe(el);});
 
-  /* ---- scroll-linked parallax: phone slides up, hero glow drifts, beam fills ---- */
-  var phone=document.querySelector('.phone');
+  /* ---- scroll-linked parallax: hero glow drifts, beam fills ---- */
   var heroGlow=document.querySelector('.hero-glow');
   var beamFill=document.getElementById('beamFill');
   var beamBead=document.getElementById('beamBead');
@@ -749,12 +734,6 @@
       var y=window.scrollY||document.documentElement.scrollTop, vh=window.innerHeight||document.documentElement.clientHeight;
       // hero glow drifts up + fades as you scroll past the hero
       if(heroGlow){ heroGlow.style.transform='translateX(-50%) translateY('+(y*0.28).toFixed(1)+'px)'; heroGlow.style.opacity=Math.max(0.25,1-y/700).toFixed(2); }
-      // phone rises into place as it enters view
-      if(phone){
-        var r=phone.getBoundingClientRect();
-        var p=Math.min(1,Math.max(0,(vh - r.top)/(vh*0.85)));
-        phone.style.transform='translateY('+((1-p)*110).toFixed(1)+'px)';
-      }
       // tracing beam fills + bead descends with scroll progress
       if(beamFill){
         var max=document.documentElement.scrollHeight-vh;
@@ -935,7 +914,7 @@
         // FormSubmit returns HTTP 200 with {success:"false"} on errors/rate-limits — check the body, not just status
         if(!res.ok || !res.d || String(res.d.success).toLowerCase()!=='true') throw new Error((res.d&&res.d.message)||'failed');
         btn.classList.remove('loading'); btn.classList.add('success');
-        btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> '+o.done;
+        btn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"/></svg> '+o.done;
         form.reset();
         msg.textContent=o.doneMsg; msg.className='form-msg ok';
         setTimeout(reset,2800);

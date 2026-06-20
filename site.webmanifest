@@ -1,0 +1,13 @@
+{
+  "name": "CORE",
+  "short_name": "CORE",
+  "description": "Quit bad habits, climb one Life Score, reset your life.",
+  "theme_color": "#050507",
+  "background_color": "#050507",
+  "display": "standalone",
+  "start_url": "./",
+  "icons": [
+    { "src": "assets/app-icon.png", "sizes": "440x440", "type": "image/png" },
+    { "src": "assets/logo-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
